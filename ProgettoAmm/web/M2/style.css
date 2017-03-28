@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-mar-2017, 18.45.36
+    Author     : Cristian
+*/
+
+body{
+    background-color: #a1a6f9;
+    font: 16px/24px "Noto Sans", Arial, sans-serif;
+}
+h1{
+    color: whitesmoke;
+    font: 37px/ 40px " Open Sans", Arial, sans-serif;
+    font-weight: bolder;
+}
+
+h2{
+    color: red;
+    font: 25px/ 23px " Open Sans", Arial, sans-serif;
+    font-weight: bolder;
+}
+
+h3{
+    color: darkred;
+    font: 17px/ 20px " Open Sans", Arial, sans-serif;
+    font-weight: bolder;
+}
+
+a:link{
+    font-size: 18px;
+    font-style: italic;
+    text-decoration: none;
+    color: darkblue;
+}
+
+a:visited{
+    font-size: 18px;
+    font-style: italic;
+    text-decoration: none;
+    color: darkblue;
+}
+a:hover{
+    font-weight: bold;
+}
+
+nav{
+    background-color: white;
+}
+
+/***** form pagina login.html *********/
+#profileform{
+    background-color: #a9a2db;
+    width: 400px;
+    margin-left: 140px;
+    margin-right: auto;
+    border-bottom: 2px solid #c3c0d8;
+    border-right: 2px solid #c3c0d8;
+    margin-bottom: 10px;
+}
+#profileform form{
+    margin-left: 100px;
+    margin-right:50px;
+    padding-bottom: 10px;   
+}
+
+#titleform{
+    font: 25px/20px "Roboto",Arial,sans-serif;
+    font-weight: bold;
+    color: white;
+    padding-left: 100px;
+    padding-top: 20px;
+}
+
+#profileform label:after{
+    font: 17px/15px "Open Sans",Arial,sans-serif;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    
+      
+    content: '\A';
+    white-space: pre;
+}
+
+#profileform input{
+   
+    width: 200px;
+    height: 20px;
+    border-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+#profileform textarea{
+    width: 200px;
+}
+
+#profileform button{
+    width: 100px; 
+}
+
+
+
+
+
