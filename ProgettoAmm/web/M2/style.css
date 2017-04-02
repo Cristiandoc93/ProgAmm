@@ -47,43 +47,42 @@ a:hover{
     font-weight: bold;
 }
 
-/*.static{
-}
-.relative{
-    position:relative;
-    
-}
-.absolute{
-    position:absolute;
-    right: 155px;
-    top: 0px;
-}*/
 
+
+/***** header e navbar *********/
 header{
-    margin-top: -25px;
+    position: relative;
+    top: 0px;
+    left: 0px;
     background-color: blue;
     width: 200px;
     height: 70px;
+    float: left;
+    border-right-style: solid;
+    
 }
 
 #title{
     text-align: center;
-    height: 45px;
+    
+    
 }
 
 nav{
     background-color: white;
-    height: 40px;
+    height: 70px;
+    
 }
 
 nav ul, nav li{
     margin: 0px;
-    height: 40px;
+    height: 50px;
     list-style-type: none; 
     display: inline-block;
 }
 
 nav li{
+    padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
     border-right: 2px solid #111111;  
@@ -95,8 +94,38 @@ nav li:last-child{
 nav li.active{
     text-decoration: underline;
 }
+/***** sidebar sinistra *********/
+
+#sidebar{
+    position: static;
+    float:left;
+    left: 0px;
+    width: 200px;
+    border-right-style: solid;
+    margin-right: 30px;
+    height: 768px;
+}
+
+#persone{
+    margin-left: 40px;
+    margin-top: 40px;
+}
+
+#titlebar{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+/***** content *********/
+
+#content{
+    position: static;
+    padding-left: 30px;
+    
+}
 
 /***** form pagina login.html *********/
+
 #profileform{
     background-color: #a9a2db;
     width: 400px;
@@ -147,6 +176,20 @@ nav li.active{
     width: 100px; 
 }
 
+/***** img post pagina bacheca.html*********/
+
+
+#post img{
+    height: 50px;
+}
+
+/***** footer *********/
+
+footer{
+    height: 50px;
+    border-top-style: solid;
+   
+}
 
 
 
