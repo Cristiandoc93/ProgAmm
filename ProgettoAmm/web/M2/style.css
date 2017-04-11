@@ -16,6 +16,7 @@ body{
 }
 
 
+
 h1{
     color: whitesmoke;
     font: 37px/ 40px " Open Sans", Arial, sans-serif;
@@ -32,6 +33,11 @@ h3{
     color: darkred;
     font: 17px/ 20px " Open Sans", Arial, sans-serif;
     font-weight: bolder;
+}
+
+.descrtrick{
+    padding-top: 10px;
+    height: 60px;
 }
 
 a:link{
@@ -63,6 +69,7 @@ a:hover{
 /***** header e navbar *********/
 #topbar{
     width: 100%;
+    border-right: 3px black solid;
 }
 
 header{
@@ -90,7 +97,7 @@ nav{
     height: 70px;
     width: 100%;
     border-bottom: black 3px solid;
-    border-right: black 3px solid;
+    
 }
 
 nav ul{
@@ -130,7 +137,8 @@ nav li:last-child{
     float:left;
     
     width: 200px;
-    border-right-style: solid;
+    border-right: 3px black solid;
+    border-bottom: 3px black solid;
     height: 100%;
     
     
@@ -159,8 +167,8 @@ nav li:last-child{
     
     background-color: #a9a2db;
     width: 580px;
-    border-bottom: 2px solid black;
-    border-right: 2px solid black;
+    border: 2px solid black;
+    
     margin-top: 20px;
    
     margin-bottom: 200px;
@@ -170,7 +178,8 @@ nav li:last-child{
 #profileform form{
     margin-left: 50px;
     margin-right:50px;
-    padding-bottom: 10px;   
+    padding-bottom: 10px;  
+    width: 100%;
 }
 
 #titleform{
@@ -224,6 +233,17 @@ nav li:last-child{
     height: 30px;
     font-weight: bold;
 }
+/***** descrizione.html **********/
+
+article{
+        padding-left: 4px;
+        padding-right: 4px;
+        background-color: #dad7f2;
+        border: #f5f5f5 solid 3px;
+        width: 99%;
+        margin-top: 3px;
+        margin-bottom: 3px;
+}
 
 /***** pagina bacheca.html*********/
 .author{
@@ -261,9 +281,14 @@ nav li:last-child{
 
 /***** pagina login.html *********/
 
+#contentLo{
+    width: 100%;
+    
+}
+
 #loginbody{
     margin-bottom: 200px;
-    margin-left: 50px;
+    margin-left: 20%;
     margin-top: 172px;
 }
 
@@ -318,6 +343,7 @@ footer{
     height: 50px;
     border-top-style: solid;
     width: 100%;
+    padding-left: 3px;
     
 }
 
@@ -355,22 +381,40 @@ footer{
     color: darkblue;
     }
     
-    header{
-        width: 105px;
-        height: 50px;
+    #topbar{
+        border: solid 2px black;
     }
     
+    header{
+        height: 50px;
+        float: none;
+        width: 100%;
+        
+    }
+    header #title{
+        height: 50px;
+    }
+    header h1{
+        margin: 0px;
+        height: 50px;
+        padding-top: 13px;
+    }
     
     #sidebar{
         float: none;
         width: 100%;
         margin-top: 2px;
         padding-top: 1px;
+        border-left: 2px solid black;
         border-right: 2px solid black;
         border-bottom: 2px solid black;
     }
     #persone{
         margin-top: 0px;
+    }
+    
+    #post {
+        margin-left: 4px;
     }
    
     #titlebar p{
@@ -389,8 +433,8 @@ footer{
     
     nav{
         height: 50px;
-        border-bottom: 2px solid black;
-        border-right: 2px solid black;
+        border-bottom: none;
+        border-right: none;
     }
     
     nav ul{
@@ -413,6 +457,11 @@ footer{
     
     #content{
         margin-left: 0px;  
+    }
+    /******** login.html 480px **********/
+    
+    #loginbody{
+        margin-left: 5px;
     }
     
     /******* profilo.html 480px *********/
@@ -440,6 +489,7 @@ footer{
     margin-left: 70px;
     margin-right: 50px;
     padding-bottom: 10px;
+    width: 83%;
     }
     
     #profileform button{
@@ -466,8 +516,97 @@ footer{
     #profileform button{
         margin-left: 20px;
     }
-        
     
+       
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1024px){
+     
+    a:visited, a:link{
+        font-size: 16px;
+        
+    }
+    header{
+        float: none;
+        width: 100%;
+        border-bottom: 3px black solid;
+    }
+    header #title{
+        height: 70px;
+    }
+    header h1{
+        margin: 0px;
+        height: 70px;
+        padding-top: 13px;
+    }
+    #topbar{
+        border: solid 3px black;
+    }
+    nav{
+        border-bottom: none;
+        border-right: none;
+    }
+    
+    
+    nav ul{
+        height: 70px;
+    }
+    
+    nav li {
+    width: 65px;
+    height: 50px;
+    padding-right: 23px;
+    padding-top: 20px;
+    }
+    
+    #sidebar{
+        width: 140px;
+        border-left: 3px black solid;
+        border-bottom: 3px black solid;
+    }
+    
+    #content {
+    margin-left: 142px;
+    }
+    /********* profilo.html inter *********/
+    #profileform{
+    
+    background-color: #a9a2db;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 200px;
+    margin-left: 10px;
+    width: 80%;
+    
+    
+    }
+    
+    #profileform form{
+        margin-left: 50px;
+        margin-right: 50px;
+        padding-bottom: 10px;
+        width: 82%;
+    }
+    
+    #titleform{
+        margin-left: 20%;
+        font: 20px/20px "Roboto",Arial,sans-serif;
+    }
+    
+    #profileform label {
+    font: 14px/15px "Open Sans",Arial,sans-serif;
+    }
+    
+    #profileform input {
+        width: 80%;
+        max-width: 200px;
+    }
+    
+    #profileform textarea {
+        padding-left: 0.5px;
+        width: 80%;
+        max-width: 200px;
+    }
 }
 
 

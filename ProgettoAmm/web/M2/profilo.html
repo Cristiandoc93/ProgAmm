@@ -13,98 +13,101 @@
     
     <body>
         
-      <div id="page">
-        <header>
-            <div id="title">
-                <h1>NerdBook</h1>
+        <div id="page">
+
+            <div id="topbar">
+                <header>
+                    <div id="title">
+                        <h1>NerdBook</h1>
+                    </div>
+                </header>
+
+                <nav>
+                    <ul>
+                        <li><a class="active" href="profilo.html">Profilo</a></li>
+                        <li><a href="descrizione.html">Descrizione</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </nav>
             </div>
-        </header>
-        
-        <nav>
-            <ul>
-                <li><a class="active" href="profilo.html">Profilo</a></li>
-                <li><a href="descrizione.html">Descrizione</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-          
-        <div id="sidebar">
-              <div id="persone" >
-                  <div id="titlebar">
-                      <p>Persone</p>
+
+            <div id="sidebar">
+                  <div id="persone" >
+                      <div id="titlebar">
+                          <p>Persone</p>
+                      </div>
+                      <div id="listpers">
+                          <p>Gianni</p>
+                          <p>Tizio</p>
+                          <p>Lara</p>
+                      </div>
                   </div>
-                  <div id="listpers">
-                      <p>Gianni</p>
-                      <p>Tizio</p>
-                      <p>Lara</p>
-                  </div>
-              </div>
-        </div>
-        
-        <div id="content">
-        
-          <div id="profileform">
-              
-            <div id="titleform">
-            <p>Inserisci i tuoi dati</p>
             </div>
-              
-            <br/>
-            <form method="post" action="#">
-                <div class="labeltrick">
-                <label for="nome">Nome utente</label>
+
+            <div id="content">
+
+                <div id="profileform">
+
+                  <div id="titleform">
+                  <p>Inserisci i tuoi dati</p>
+                  </div>
+
+                  <br/>
+                  <form method="post" action="#">
+                      <div class="labeltrick">
+                      <label for="nome">Nome utente</label>
+                      </div>
+                      <input name="nome" id="nome" type="text"/>
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="cognome">Cognome utente</label>
+                      </div>
+                      <input name="cognome" id="cognome" type="text"/>
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="img"> Url Immagine profilo</label>
+                      </div>
+                      <input name="img" id="img" type="url"/>
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="present">Presentazione</label>
+                      </div>
+                      <textarea name="present" id="present"></textarea>
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="bday">Data di nascita</label>
+                      </div>
+                      <input name="bday" id="bday" type="date"/>
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="psw">Password</label>
+                      </div>
+                      <input name="psw" id="psw" type="password">
+                      <br/>
+
+                      <div class="labeltrick">
+                      <label for="cpsw">Conferma Password</label>
+                      </div>
+                      <input name="cpsw" id="cpsw" type="password">
+                      <br/>
+
+                      <button type="submit">Invia</button> 
+
+                  </form>
+
                 </div>
-                <input name="nome" id="nome" type="text"/>
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="cognome">Cognome utente</label>
-                </div>
-                <input name="cognome" id="cognome" type="text"/>
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="img"> Url Immagine profilo</label>
-                </div>
-                <input name="img" id="img" type="url"/>
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="present">Presentazione</label>
-                </div>
-                <textarea name="present" id="present"></textarea>
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="bday">Data di nascita</label>
-                </div>
-                <input name="bday" id="bday" type="date"/>
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="psw">Password</label>
-                </div>
-                <input name="psw" id="psw" type="password">
-                <br/>
-                
-                <div class="labeltrick">
-                <label for="cpsw">Conferma Password</label>
-                </div>
-                <input name="cpsw" id="cpsw" type="password">
-                <br/>
-                
-                <button type="submit">Invia</button> 
-                    
-            </form>
-            
-          </div>
-            
-        </div>
+
+            </div>
         
-        <footer>
-            <p> Copyright Cristian 2017</p>
-        </footer> 
-      </div>
+            <footer>
+                <p> Copyright Cristian 2017</p>
+            </footer> 
+        </div>
         
     </body>
 
