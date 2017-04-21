@@ -43,24 +43,22 @@ public class Login extends HttpServlet {
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
             
-            ArrayList<UtentiReg> listaUtenti = UtentiRegFactory.getInstance()
-                    .getUserList();
+            ArrayList<UtentiReg> listaUtenti = UtentiRegFactory.getInstance().getUtenteList();
             
             for(UtentiReg u : listaUtenti)
             {
-                if(u.getUsername().equals(username) && 
-                        u.getPassword().equals(password))
+                if(u.getUsername().equals(username) && u.getPassword().equals(password))
                 {
                     session.setAttribute("loggedId", true);
                     session.setAttribute("id", u.getId());
                     
-                   
+                    request.setAttribute("utente", u);
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                 }
             }
             
         }
-        request.getRequestDispatcher("loginform.jsp")
-                .forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
         
     }
 

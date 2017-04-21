@@ -44,32 +44,47 @@ public class UtentiRegFactory {
         utente2.setUrlfotoprofilo("img/marioloco.jpg");
         utente2.setPresentazione("Bye Bye");
         utente2.setDataNascita("12/09/1956");
-        utente2.setPassword("2234324");
+        utente2.setPassword("2");
         
         UtentiReg utente3 = new UtentiReg();
         
-        utente2.setId(2);
-        utente2.setUsername("gianino");
-        utente2.setNome("Gianni");
-        utente2.setUrlfotoprofilo("img/marioloco.jpg");
-        utente2.setPresentazione("Bye Bye");
-        utente2.setPassword("2234324");
+        utente3.setId(1);
+        utente3.setUsername("pino");
+        utente3.setNome(null);
+        utente3.setCognome(null);
+        utente3.setUrlfotoprofilo("img/tinotoni.jpg");
+        utente3.setPresentazione("ti amo ti amo");
+        utente3.setDataNascita("10/09/1986");
+        utente3.setPassword("000000");
+        
+       
         
         listaUtenti.add(utente1);
         listaUtenti.add(utente2);
         listaUtenti.add(utente3);
         
     }
-    public UtentiReg getUtenteById(int id) {
-        for (UtentiReg utente : this.listaUtenti) {
-            if (utente.getId() == id) {
-                return utente;
+    /*public UtentiReg getUtenteById(int id) {
+        for (UtentiReg u : this.listaUtenti) {
+            if (u.getId() == id) {
+                return u;
             }
         }
         return null;
+    }*/
+    
+      public ArrayList<UtentiReg> getUtenteList()
+    {
+        return listaUtenti;
     }
-
-    public ArrayList<UtentiReg> getUserList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UtentiReg getUtenteById(int id)
+    {
+        for(UtentiReg u : listaUtenti)
+        {
+            if(u.id == id)
+                return u;
+        }
+        return null;
     }
+      
 }
