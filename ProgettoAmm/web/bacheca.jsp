@@ -9,7 +9,7 @@
 <html>
     
     <head>
-        <title>.:Bacheca:.</title>
+        <title>.:Bacheca di ${utente.nome}</title>
         <meta charset="UTF-8">
         <meta name="author" content="Cristian">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,11 +30,11 @@
 
                   <div class="posts">
                       <div class="author">
-                          <img class="imgp" alt="Foto di Gino Pino" src="${UtentiReg.urlfotoprofilo}">
-                          <h3>${UtentiReg.nome} ${UtentiReg.cognome}</h3>
+                          <img class="imgp" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
+                          <h3>${utente.nome} ${utente.cognome}</h3>
                       </div>
                       <p> 
-                          ${Posts.post}
+                          ${posts.post}
                       </p>
                   </div>
               </div>

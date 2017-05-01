@@ -8,7 +8,6 @@ package amm.nerdbook;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,30 +37,44 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         
+   
+        
         if(request.getParameter("Submit") != null)
-        {
+        { //inserimento dati
             String username = request.getParameter("Username");
             String password = request.getParameter("Password");
-            
             ArrayList<UtentiReg> listaUtenti = UtentiRegFactory.getInstance().getUtenteList();
-            
+           
+            //ricerca dati dalle Factory
             for(UtentiReg u : listaUtenti)
             {
                 if(u.getUsername().equals(username) && u.getPassword().equals(password))
-                {
-                    session.setAttribute("loggedId", true);
-                    session.setAttribute("id", u.getId());
-                    
-                    request.setAttribute("utente", u);
-                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-                }
+                  {   //caso dati non mancanti
+                      if (u.getNome() != null && u.getCognome() != null && u.getUrlfotoprofilo() != null
+                            && u.getPresentazione() != null)
+                        {
+                            session.setAttribute("loggedId", true);
+                            session.setAttribute("id", u.getId());                 
+                            request.setAttribute("utente", u);
+                            request.getRequestDispatcher("/bacheca.jsp").forward(request, response);
+                        }   
+                      else //caso dati mancanti
+                      
+                            request.getRequestDispatcher("/profilo.html").forward(request, response);
+                  }
+              
             }
+            //caso utente non registrato 
+            request.setAttribute("logError", "Username o Password errati. Riprovare");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
             
         }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        
+        //pagina di default
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
         
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -10,13 +10,13 @@ public class UtentiReg{
     protected int id;
 
     
-    protected String username;
-    protected String nome;
-    protected String cognome;
-    protected String urlfotoprofilo;
-    protected String presentazione;
-    protected String dataNascita;
-    protected String password;
+    private String username;
+    private String nome;
+    private String cognome;
+    private String urlfotoprofilo;
+    private String presentazione;
+    private String dataNascita;
+    private String password;
     
     public UtentiReg(){
         

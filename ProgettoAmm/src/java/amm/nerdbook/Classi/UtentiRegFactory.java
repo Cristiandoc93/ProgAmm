@@ -48,7 +48,7 @@ public class UtentiRegFactory {
         
         UtentiReg utente3 = new UtentiReg();
         
-        utente3.setId(1);
+        utente3.setId(2);
         utente3.setUsername("pino");
         utente3.setNome(null);
         utente3.setCognome(null);
@@ -64,16 +64,9 @@ public class UtentiRegFactory {
         listaUtenti.add(utente3);
         
     }
-    /*public UtentiReg getUtenteById(int id) {
-        for (UtentiReg u : this.listaUtenti) {
-            if (u.getId() == id) {
-                return u;
-            }
-        }
-        return null;
-    }*/
+   
     
-      public ArrayList<UtentiReg> getUtenteList()
+    public ArrayList<UtentiReg> getUtenteList()
     {
         return listaUtenti;
     }
@@ -86,5 +79,14 @@ public class UtentiRegFactory {
         }
         return null;
     }
-      
+    
+    public int getIdByUserAndPassword(String user, String password){
+        for(UtentiReg utente : this.listaUtenti){
+            if(utente.getNome().equals(user) && utente.getPassword().equals(password)){
+                return utente.getId();
+            }
+        }
+        return -1;
+    }
+    
 }
