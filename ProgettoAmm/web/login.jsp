@@ -3,7 +3,7 @@
     Created on : 20-apr-2017, 17.55.00
     Author     : Cristian
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,8 +37,8 @@
              
             
         
-                    <form action="Login" method="post">
-                        <!--<input type="hidden" name="cmd" value="login"> -->
+                    <form action="login.html" method="post">
+                        
                         <br/>
                         <label for="user">Username</label>
                         <input name="Username" id="user" type="text" value=""/>
@@ -49,20 +49,16 @@
 
                         <input type="submit" name="Submit" value="Accedi">
                     </form>
-                            <%
-                                if(null!=request.getAttribute("logError"))
-                                    {
-                                     out.println(request.getAttribute("logError"));
-                                    }
-                            %>
+                            
+                            <c:if test="${logError != null}">
+                                <p> Username o Password errati. Riprovare </p>
+                            </c:if>
                 </div>
          
             </div>
         </div> 
            
-        <footer>
-            <p> Copyright Cristian 2017</p>
-        </footer> 
+        <jsp:include page="footer.jsp"/>
        </div>
         
     </body>

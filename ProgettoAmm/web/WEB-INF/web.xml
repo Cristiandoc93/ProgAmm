@@ -14,15 +14,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Bacheca</servlet-name>
-        <url-pattern>/Bacheca</url-pattern>
+        <url-pattern>/bacheca.html</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Profilo</servlet-name>
-        <url-pattern>/Profilo</url-pattern>
+        <url-pattern>/profilo.html</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <url-pattern>/login.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -30,6 +30,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>descrizione</welcome-file>
+        <welcome-file>/descrizione.html</welcome-file>
     </welcome-file-list>
 </web-app>

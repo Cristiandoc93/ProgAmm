@@ -5,12 +5,17 @@
  */
 package amm.nerdbook;
 
+
+       
+import amm.nerdbook.Classi.UtentiReg;
+import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,18 +35,45 @@ public class Profilo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Profilo</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Profilo at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        HttpSession session = request.getSession(true);
+        
+        //inserimento dati profilo
+        
+        if(request.getParameter("Conf") != null){
+            session.setAttribute("name", request.getParameter("nome"));
+            session.setAttribute("sirname", request.getParameter("cognome"));
+            session.setAttribute("image", request.getParameter("img"));
+            session.setAttribute("presentazione", request.getParameter("present"));
+            session.setAttribute("birthday", request.getParameter("bday"));
+            session.setAttribute("password", request.getParameter("psw"));
+            session.setAttribute("confpsw", request.getParameter("cpsw"));
+            
+            request.setAttribute("modifica" , "ok");
+            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+            
         }
+        
+        
+        // caso utente loggato
+        
+        if (session.getAttribute("loggedOn") != null &&
+            session.getAttribute("loggedOn").equals(true)) {
+            
+            
+            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+            
+            
+            
+        }
+        else //caso errore login
+        {
+            request.setAttribute("proError", "true");
+        
+            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

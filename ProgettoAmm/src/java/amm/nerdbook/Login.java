@@ -10,7 +10,6 @@ import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Cristian
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+
 public class Login extends HttpServlet {
 
     /**
@@ -49,29 +48,31 @@ public class Login extends HttpServlet {
             for(UtentiReg u : listaUtenti)
             {
                 if(u.getUsername().equals(username) && u.getPassword().equals(password))
-                  {   //caso dati non mancanti
+                  {   
+                      session.setAttribute("loggedOn", true);
+                      //caso dati non mancanti
                       if (u.getNome() != null && u.getCognome() != null && u.getUrlfotoprofilo() != null
                             && u.getPresentazione() != null)
                         {
-                            session.setAttribute("loggedId", true);
+                           
                             session.setAttribute("id", u.getId());                 
                             request.setAttribute("utente", u);
-                            request.getRequestDispatcher("/bacheca.jsp").forward(request, response);
+                            request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                         }   
                       else //caso dati mancanti
-                      
-                            request.getRequestDispatcher("/profilo.html").forward(request, response);
+                            
+                            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
                   }
               
             }
             //caso utente non registrato 
-            request.setAttribute("logError", "Username o Password errati. Riprovare");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.setAttribute("logError", "true");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
             
         }
         
         //pagina di default
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
         
     }
     
