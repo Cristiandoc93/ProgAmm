@@ -1,15 +1,17 @@
 
 package amm.nerdbook.Classi;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Cristian
  */
 public class UtentiReg{
+    private ArrayList<Post> posts = new ArrayList<Post>();
     
-    protected int id;
-
     
+    private int id;
     private String username;
     private String nome;
     private String cognome;
@@ -127,6 +129,14 @@ public class UtentiReg{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public ArrayList<Post> getPostUtente() {
+        return posts;
+    }
+    
+    public void setPostUtente(ArrayList<Post> posts) {
+        this.posts = posts;
     }
 }
 

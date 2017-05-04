@@ -18,29 +18,67 @@
     </head>
     
     <body>
+        <div id="page">
+            
+        <div id="topbar">
+        
         <c:set var="title" value="Bacheca Personale" scope="request"/>
         <jsp:include page="header.jsp"/>
         
         <c:set var="page" value="bacheca" scope="request"/>
         <jsp:include page="nav.jsp"/>
-
+        
+        </div>
+        <jsp:include page="nesidebar.jsp"/>
+        
+        
+           
             <div id="content">
-
-              <div id="post">
-
-                  <div class="posts">
-                      <div class="author">
-                          <img class="imgp" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
-                          <h3>${utente.nome} ${utente.cognome}</h3>
-                      </div>
-                      <p> 
-                          ${posts.post}
-                      </p>
-                  </div>
-              </div>
-
-            </div>    
-    
+                <!-- Utente non connesso -->
+                <c:if test="${loggedOn != true}">
+                    
+                    <div id="errorProfile">
+                        <p> Accesso negato </p>
+                        <br/>
+                        <p> Devi prima loggarti! </p>
+                    </div>
+                    <div id="content" class="nascosto">
+                        
+                    </div>
+                    <div id="post" class="nascosto">
+           
+                    </div>
+                    
+                </c:if>
+                
+                <!-- Utente connesso -->
+                
+                <c:if test="${loggedOn == true}">
+                  
+                <div id="post">
+                <c:forEach var="post" items="${posts}">    
+                    <div class="posts">
+                        <div class="author">
+                            <img class="imgp" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
+                            <h3>${utente.nome} ${utente.cognome}</h3>
+                        </div>
+                        
+                        
+                        <p> 
+                            ${post.content}
+                        </p>
+                        
+                    </div>
+                </c:forEach>  
+                </div>
+                      
+                </c:if>
+                
+            </div>
+            
+        </div>  
+        <jsp:include page="footer.jsp"/>
+             
     </body>
 
 </html>

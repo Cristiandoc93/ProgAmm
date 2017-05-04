@@ -32,20 +32,10 @@
                 
                 <c:set var="page" value="profilo" scope="request"/>
                 <jsp:include page="nav.jsp"/>
+                
             </div>
 
-            <div id="sidebar">
-                  <div id="persone" >
-                      <div id="titlebar">
-                          <p>Persone</p>
-                      </div>
-                      <div id="listpers">
-                          <p>Gianni</p>
-                          <p>Tizio</p>
-                          <p>Lara</p>
-                      </div>
-                  </div>
-            </div>
+            <jsp:include page="nesidebar.jsp"/>
             
             
             
@@ -130,6 +120,8 @@
                   
                 </div>
                 </c:if> 
+            
+            
             <!-- Modifica dati ----->
             
                 <c:if test="${not empty modifica && loggedOn == true}">
@@ -169,6 +161,8 @@
                     </div>
                     
                 </c:if>
+            
+            
             
                 
             </div>

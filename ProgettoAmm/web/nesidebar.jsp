@@ -10,14 +10,18 @@
     <div id="persone" >
 
         <div id="titlebar">
-            <p>Persone</p>
+            <p>Persone online</p>
         </div>
-
+        
+        <c:if test="${loggedOn == true}">
         <div id="listpers">
-            <p>Gianni</p>
-            <p>Tizio</p>
-            <p>Lara</p>
+            <c:forEach var="utenti" items="${utenti}">
+                <c:if test="${utenti.nome != null}">
+                    <p><a href="bacheca.html?user=${utenti.id}">${utenti.nome} ${utenti.cognome}</a></p>
+                </c:if>
+            </c:forEach>
         </div>
-
+        </c:if>
+        
     </div>
 </div>

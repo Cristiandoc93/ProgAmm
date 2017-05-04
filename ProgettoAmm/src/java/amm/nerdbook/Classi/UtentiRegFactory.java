@@ -51,17 +51,30 @@ public class UtentiRegFactory {
         utente3.setId(2);
         utente3.setUsername("pino");
         utente3.setNome(null);
-        utente3.setCognome(null);
-        utente3.setUrlfotoprofilo("img/tinotoni.jpg");
-        utente3.setPresentazione("ti amo ti amo");
+        utente3.setCognome("Piccolo");
+        utente3.setUrlfotoprofilo(null);
+        utente3.setPresentazione(null);
         utente3.setDataNascita("10/09/1986");
         utente3.setPassword("000000");
+        
+        UtentiReg utente4 = new UtentiReg();
+        
+        utente4.setId(3);
+        utente4.setUsername("lola");
+        utente4.setNome("Lolita");
+        utente4.setCognome("Bianchi");
+        utente4.setUrlfotoprofilo("img/tinotoni.jpg");
+        utente4.setPresentazione("Bye Bye");
+        utente4.setDataNascita("12/09/1956");
+        utente4.setPassword("2");
         
        
         
         listaUtenti.add(utente1);
         listaUtenti.add(utente2);
         listaUtenti.add(utente3);
+        listaUtenti.add(utente4);
+        
         
     }
    
@@ -74,19 +87,14 @@ public class UtentiRegFactory {
     {
         for(UtentiReg u : listaUtenti)
         {
-            if(u.id == id)
+            if(u.getId() == id)
                 return u;
         }
         return null;
     }
     
-    public int getIdByUserAndPassword(String user, String password){
-        for(UtentiReg utente : this.listaUtenti){
-            if(utente.getNome().equals(user) && utente.getPassword().equals(password)){
-                return utente.getId();
-            }
-        }
-        return -1;
-    }
+    
+    
+   
     
 }

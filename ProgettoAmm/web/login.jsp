@@ -19,7 +19,7 @@
     
     <body>
         
-            <c:set var="title" value="Login" scope="request"/>
+        <c:set var="title" value="Login" scope="request"/>
         <div id="page">
            
           

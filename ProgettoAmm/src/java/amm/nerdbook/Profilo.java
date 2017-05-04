@@ -11,6 +11,7 @@ import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,9 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(true);
         
+         List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtenteList();
+         request.setAttribute("utenti", utenti);
+        
         //inserimento dati profilo
         
         if(request.getParameter("Conf") != null){
@@ -51,6 +55,7 @@ public class Profilo extends HttpServlet {
             
             request.setAttribute("modifica" , "ok");
             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+            
             
         }
         
@@ -68,7 +73,6 @@ public class Profilo extends HttpServlet {
         }
         else //caso errore login
         {
-            request.setAttribute("proError", "true");
         
             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
         }

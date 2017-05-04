@@ -36,8 +36,18 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
         
-   
+     
+       
+        //caso utente loggato
         
+        if(session.getAttribute("loggedOn")!=null &&
+           session.getAttribute("loggedOn").equals(true)){
+            
+        request.getRequestDispatcher("bacheca.html").forward(request, response);
+        
+        }
+        
+        // caso inserimento dati loggin
         if(request.getParameter("Submit") != null)
         { //inserimento dati
             String username = request.getParameter("Username");
@@ -48,33 +58,38 @@ public class Login extends HttpServlet {
             for(UtentiReg u : listaUtenti)
             {
                 if(u.getUsername().equals(username) && u.getPassword().equals(password))
-                  {   
+                    {   
                       session.setAttribute("loggedOn", true);
-                      //caso dati non mancanti
+                      session.setAttribute("id", u.getId()); 
+                            request.setAttribute("utente", u);
+                      //caso attributi presenti
                       if (u.getNome() != null && u.getCognome() != null && u.getUrlfotoprofilo() != null
                             && u.getPresentazione() != null)
                         {
-                           
-                            session.setAttribute("id", u.getId());                 
-                            request.setAttribute("utente", u);
-                            request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-                        }   
-                      else //caso dati mancanti
                             
-                            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
-                  }
-              
+                            request.getRequestDispatcher("bacheca.html").forward(request, response);
+                        }   
+                      else{ //caso attributi mancanti
+                            
+                            request.setAttribute("bacError", true);
+                            request.getRequestDispatcher("profilo.html").forward(request, response);
+                            
+                      }
+                    }
             }
             //caso utente non registrato 
-            request.setAttribute("logError", "true");
+            request.setAttribute("logError", true);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             
         }
-        
+    else{  
         //pagina di default
         request.getRequestDispatcher("login.jsp").forward(request, response);
         
     }
+   
+    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
