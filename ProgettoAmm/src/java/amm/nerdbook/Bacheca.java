@@ -29,39 +29,65 @@ public class Bacheca extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
+       
+         
         
-    
-        //  bacheca del loger //
+        
+        //  bacheca dello user //
         if(session!=null && 
            session.getAttribute("loggedOn")!=null &&
            session.getAttribute("loggedOn").equals(true)){
           
             String user = request.getParameter("user");
             int userID;
-             
-             
+          
+           
+            
+           
+            
             if(user != null){
                 userID = Integer.parseInt(user);
             } else {
                 Integer id = (Integer)session.getAttribute("id");
+               
                 userID = id;
-            }
+                }
+           
             
-        
+            
         UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
         if(utente != null){
             request.setAttribute("utente", utente);
             
+           
+            
             List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtenteList();
             request.setAttribute("utenti", utenti);
             
+            
+            
             List<Post> posts = PostFactory.getInstance().getPostList(utente);
             request.setAttribute("posts", posts);
+            //caso nuovo post
+            if(request.getParameter("inviapost") != null){
+            session.setAttribute("wrPost", request.getParameter("newpost"));
+            request.setAttribute("invioPost", "okk");
+            request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+            //caso conferma nuovo post
+            if(request.getParameter("sendpost") != null){
+            request.setAttribute("sendPostok", "okk");
+            request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
             
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-            } 
-          
+            
+            
+    
+            }
        
+            
+        
+         
+        
         }
         // caso utente non loggato//
         else {
@@ -69,8 +95,12 @@ public class Bacheca extends HttpServlet {
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);
         }
         
+        if(request.getAttribute("bacError")!=null){
+            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+        }
         
-        
+         
+            
         
     }
     

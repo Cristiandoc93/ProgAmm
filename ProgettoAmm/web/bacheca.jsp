@@ -22,7 +22,7 @@
             
         <div id="topbar">
         
-        <c:set var="title" value="Bacheca Personale" scope="request"/>
+       
         <jsp:include page="header.jsp"/>
         
         <c:set var="page" value="bacheca" scope="request"/>
@@ -34,7 +34,52 @@
         
            
             <div id="content">
-                <!-- Utente non connesso -->
+                
+                
+                <%-- pagina di invio post --%>
+                
+                <c:if test="${invioPost != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                    <form action="bacheca.html?user=${utente.id}" method="post">
+                        <p class="sumPost"> ${nome} sta scrivendo nella bacheca di ${utente.nome}</p>
+                        <div id='summaryPost'>
+                        <p> ${wrPost} </p>
+                        </div>
+                        
+                        <input type="submit" name="sendpost" value="Invia post">
+                    </form>       
+                    </div>
+                    
+                </div>
+            
+                </c:if>
+                
+                <%-- caso messaggio inviato ---%>
+                
+                <c:if test="${sendPostok != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                    
+                        <p class="sumPost">Hai scritto sulla bacheca di ${utente.nome}</p>
+                        
+                        
+                        </div>
+                        
+                    
+                       
+                    </div>
+                    
+                </div>
+            
+                </c:if>
+                
+                <%-- Utente non connesso --%>
+                
                 <c:if test="${loggedOn != true}">
                     
                     <div id="errorProfile">
@@ -51,10 +96,44 @@
                     
                 </c:if>
                 
-                <!-- Utente connesso -->
+                <%-- Utente connesso attributi mancanti--%>
                 
                 <c:if test="${loggedOn == true}">
-                  
+                    <c:if test="${utente.nome == null || 
+                                  utente.cognome == null ||
+                                  utente.urlfotoprofilo == null ||
+                                  utente.presentazione == null }">
+                    <div id="errorProfile">
+                        <p> Accesso negato </p>
+                       
+                        <p> Devi prima finire il tuo profilo! </p>
+                    </div>
+                    <div id="content" class="nascosto">
+                        
+                    </div>
+                    <div id="post" class="nascosto">
+           
+                    </div>
+                    </c:if>
+                </c:if>
+                
+                <%-- Utente connesso --%>
+                
+                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null}">
+                <div id="newPost">
+                    
+                <form action="bacheca.html?user=${utente.id}" method="post">
+
+                    <label for="newpost">Scrivi un nuovo post sulla bacheca di ${utente.nome}</label>
+                    <br/>
+
+                  <textarea name="newpost" id="newpost"></textarea>
+                    
+                    
+                    <input type="submit" name="inviapost" value="Scrivi">
+                </form>
+                </div>
+                   
                 <div id="post">
                 <c:forEach var="post" items="${posts}">    
                     <div class="posts">
@@ -73,7 +152,6 @@
                 </div>
                       
                 </c:if>
-                
             </div>
             
         </div>  

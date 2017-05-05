@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
         //caso utente loggato
         
         if(session.getAttribute("loggedOn")!=null &&
-           session.getAttribute("loggedOn").equals(true)){
+           session.getAttribute("loggedOn").equals(true)) {
             
         request.getRequestDispatcher("bacheca.html").forward(request, response);
         
@@ -60,7 +60,8 @@ public class Login extends HttpServlet {
                 if(u.getUsername().equals(username) && u.getPassword().equals(password))
                     {   
                       session.setAttribute("loggedOn", true);
-                      session.setAttribute("id", u.getId()); 
+                      session.setAttribute("id", u.getId());
+                      session.setAttribute("nome", u.getNome());
                             request.setAttribute("utente", u);
                       //caso attributi presenti
                       if (u.getNome() != null && u.getCognome() != null && u.getUrlfotoprofilo() != null
@@ -68,6 +69,7 @@ public class Login extends HttpServlet {
                         {
                             
                             request.getRequestDispatcher("bacheca.html").forward(request, response);
+                           
                         }   
                       else{ //caso attributi mancanti
                             
@@ -81,12 +83,13 @@ public class Login extends HttpServlet {
             request.setAttribute("logError", true);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             
-        }
-    else{  
+        }else{  
         //pagina di default
         request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
         
-    }
+        
+        
    
     }
     
