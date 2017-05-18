@@ -28,7 +28,7 @@
                               utenti.urlfotoprofilo != null &&
                               utenti.presentazione != null}">
                       
-                    <p><a href="bacheca.html?user=${utenti.id}">${utenti.nome} ${utenti.cognome}</a></p>
+                    <p><a href="login.html?user=${utenti.id}">${utenti.nome} ${utenti.cognome}</a></p>
                 </c:if>
             </c:forEach>
         </div>

@@ -5,6 +5,8 @@
  */
 package amm.nerdbook.Classi;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Cristian
@@ -65,6 +67,10 @@ public class Post {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    void setUser(ArrayList<UtentiReg> autore) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

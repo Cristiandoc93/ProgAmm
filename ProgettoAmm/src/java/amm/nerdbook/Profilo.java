@@ -39,7 +39,7 @@ public class Profilo extends HttpServlet {
         
         HttpSession session = request.getSession(true);
         
-         List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtenteList();
+         List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
          request.setAttribute("utenti", utenti);
         
         //inserimento dati profilo

@@ -1,0 +1,39 @@
+//ENTITA'//
+
+UTENTI
+
+-id (KEY)
+-username
+-nome
+-cognome
+-urlfotoprofilo
+-presentazione
+-datanascita
+-password
+
+
+POST
+
+-id (KEY)
+-user ( REFERENCES id(UTENTI) )
+-content
+
+
+GRUPPI
+
+-id (KEY)
+-datacreazione
+-utente ( REFERENCES id(UTENTI))
+
+//RELAZIONI//
+
+SCRIVE [ 1 a 1 ]
+
+( un utente scrive un post , un post è scritto da un solo utente )
+
+PARTECIPA [ n a n ]
+
+( un utente partecipa a più gruppi e ad un guppo partecipano più utenti )
+
+-utente_id (KEY) (REFERENCES id(UTENTI))
+-gruppo_id (KEY) (REFERENCES id(GRUPPI))

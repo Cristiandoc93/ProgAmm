@@ -11,14 +11,14 @@ public class UtentiReg{
     private ArrayList<Post> posts = new ArrayList<Post>();
     
     
-    private int id;
-    private String username;
-    private String nome;
-    private String cognome;
-    private String urlfotoprofilo;
-    private String presentazione;
-    private String dataNascita;
-    private String password;
+    protected int id;
+    protected String username;
+    protected String nome;
+    protected String cognome;
+    protected String urlfotoprofilo;
+    protected String presentazione;
+    protected String datanascita;
+    protected String password;
     
     public UtentiReg(){
         
@@ -27,7 +27,7 @@ public class UtentiReg{
         cognome = "";
         urlfotoprofilo = "";
         presentazione = "";
-        dataNascita = "";
+        datanascita = "";
         password = "";
     }
 
@@ -96,17 +96,17 @@ public class UtentiReg{
     }
 
     /**
-     * @return the dataNascita
+     * @return the datanascita
      */
-    public String getDataNascita() {
-        return dataNascita;
+    public String getDatanascita() {
+        return datanascita;
     }
 
     /**
-     * @param dataNascita the dataNascita to set
+     * @param datanascita the dataNascita to set
      */
-    public void setDataNascita(String dataNascita) {
-        this.dataNascita = dataNascita;
+    public void setDatanascita(String datanascita) {
+        this.datanascita = datanascita;
     }
 
     /**

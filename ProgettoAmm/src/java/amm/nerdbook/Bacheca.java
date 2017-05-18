@@ -5,7 +5,10 @@ import amm.nerdbook.Classi.UtentiRegFactory;
 import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,60 +27,73 @@ public class Bacheca extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
+    
+    
+        
+     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
-       
+        HttpSession session = request.getSession(true);
+      
          
+         
+         
+         
+        //caso utente loggato
         
         
-        //  bacheca dello user //
-        if(session!=null && 
+         if(session!=null && 
            session.getAttribute("loggedOn")!=null &&
            session.getAttribute("loggedOn").equals(true)){
           
             String user = request.getParameter("user");
-            int userID;
-          
-           
             
-           
+            int userID = (int)session.getAttribute("id");
             
+            request.setAttribute("prova", userID);
+            
+            /*
             if(user != null){
                 userID = Integer.parseInt(user);
             } else {
+                //userID = UtentiRegFactory.getInstance().getIdUserAndPassword(request.getParameter("Username"), request.getParameter("Password"));
                 Integer id = (Integer)session.getAttribute("id");
-               
                 userID = id;
+                
                 }
            
-            
-            
-        UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
+*/
+          
+         UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
+      // UtentiReg utente = UtentiRegFactory.getInstance().getUtente(request.getParameter("Username"), request.getParameter("Password"));
         if(utente != null){
             request.setAttribute("utente", utente);
             
-           
             
-            List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtenteList();
+            List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
             request.setAttribute("utenti", utenti);
             
             
             
             List<Post> posts = PostFactory.getInstance().getPostList(utente);
             request.setAttribute("posts", posts);
-            //caso nuovo post
-            if(request.getParameter("inviapost") != null){
-            session.setAttribute("wrPost", request.getParameter("newpost"));
-            request.setAttribute("invioPost", "okk");
-            request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
-            //caso conferma nuovo post
-            if(request.getParameter("sendpost") != null){
-            request.setAttribute("sendPostok", "okk");
-            request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
             
+            //caso nuovo post
+                if(request.getParameter("inviapost") != null){
+                session.setAttribute("wrPost", request.getParameter("newpost"));
+                request.setAttribute("invioPost", "okk");
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+            
+            //caso conferma nuovo post
+                if(request.getParameter("sendpost") != null){
+                request.setAttribute("sendPostok", "okk");
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+                
+            session.setAttribute("loggedOn", true);            
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             
             
@@ -85,7 +101,7 @@ public class Bacheca extends HttpServlet {
             }
        
             
-        
+        request.getRequestDispatcher("bacheca.jsp").forward(request, response);
          
         
         }
@@ -101,7 +117,7 @@ public class Bacheca extends HttpServlet {
         
          
             
-        
+      
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -47,6 +47,7 @@
                         <p class="sumPost"> ${nome} sta scrivendo nella bacheca di ${utente.nome}</p>
                         <div id='summaryPost'>
                         <p> ${wrPost} </p>
+                        <p> ${urlPost} </p>
                         </div>
                         
                         <input type="submit" name="sendpost" value="Invia post">
@@ -98,7 +99,7 @@
                 
                 <%-- Utente connesso attributi mancanti--%>
                 
-                <c:if test="${loggedOn == true}">
+                <c:if test="${loggedOn == true && bacError != null}">
                     <c:if test="${utente.nome == null || 
                                   utente.cognome == null ||
                                   utente.urlfotoprofilo == null ||
@@ -122,15 +123,18 @@
                 <c:if test="${loggedOn == true && invioPost == null && sendPostok == null}">
                 <div id="newPost">
                     
+                    ${prova};
+                    
                 <form action="bacheca.html?user=${utente.id}" method="post">
 
                     <label for="newpost">Scrivi un nuovo post sulla bacheca di ${utente.nome}</label>
                     <br/>
 
                   <textarea name="newpost" id="newpost"></textarea>
-                    
-                    
-                    <input type="submit" name="inviapost" value="Scrivi">
+                  <label for="urlP"> Puoi anche aggiungere un allegato!</label>
+                  <input name="urlP" id="urlP" type="url"/>
+                  <br/>                    
+                  <input type="submit" name="inviapost" value="Scrivi">
                 </form>
                 </div>
                    
