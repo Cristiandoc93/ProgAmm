@@ -56,7 +56,7 @@ public class Bacheca extends HttpServlet {
             
             request.setAttribute("prova", userID);
             
-            /*
+            
             if(user != null){
                 userID = Integer.parseInt(user);
             } else {
@@ -66,14 +66,14 @@ public class Bacheca extends HttpServlet {
                 
                 }
            
-*/
+
           
          UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
       // UtentiReg utente = UtentiRegFactory.getInstance().getUtente(request.getParameter("Username"), request.getParameter("Password"));
         if(utente != null){
             request.setAttribute("utente", utente);
             
-            
+            String content = request.getParameter("newpost");
             List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
             request.setAttribute("utenti", utenti);
             
@@ -84,12 +84,17 @@ public class Bacheca extends HttpServlet {
             
             //caso nuovo post
                 if(request.getParameter("inviapost") != null){
+                request.setAttribute("content", content);
                 session.setAttribute("wrPost", request.getParameter("newpost"));
                 request.setAttribute("invioPost", "okk");
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
             
             //caso conferma nuovo post
                 if(request.getParameter("sendpost") != null){
+                    Post post = new Post();
+                    post.setContent(content);
+                    post.setUser(UtentiRegFactory.getInstance().getUtenteById(userID));
+                    PostFactory.getInstance().addNewPost(post);
                 request.setAttribute("sendPostok", "okk");
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
                 

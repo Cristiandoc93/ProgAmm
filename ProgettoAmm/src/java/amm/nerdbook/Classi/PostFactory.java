@@ -150,17 +150,18 @@ public class PostFactory {
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             
             String query = 
-                      "insert into posts (id, utente_post, content) "
+                      "insert into post (id, utente_post, content) "
                     + "values (default, ? , ?)";
             
             // Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(query);
             
             // Si associano i valori
-            stmt.setString(1, post.getContent());
+            
 
             
-            stmt.setInt(3, post.getUser().getId());
+            stmt.setInt(1, post.getUser().getId());
+            stmt.setString(2, post.getContent());
             
             // Esecuzione query
             stmt.executeUpdate();
