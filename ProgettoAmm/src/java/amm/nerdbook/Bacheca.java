@@ -54,13 +54,13 @@ public class Bacheca extends HttpServlet {
             
             int userID = (int)session.getAttribute("id");
             
-            request.setAttribute("prova", userID);
+            
             
             
             if(user != null){
                 userID = Integer.parseInt(user);
             } else {
-                //userID = UtentiRegFactory.getInstance().getIdUserAndPassword(request.getParameter("Username"), request.getParameter("Password"));
+                
                 Integer id = (Integer)session.getAttribute("id");
                 userID = id;
                 
@@ -69,34 +69,59 @@ public class Bacheca extends HttpServlet {
 
           
          UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
-      // UtentiReg utente = UtentiRegFactory.getInstance().getUtente(request.getParameter("Username"), request.getParameter("Password"));
+         
+         
+        
+      
         if(utente != null){
             request.setAttribute("utente", utente);
             
             String content = request.getParameter("newpost");
+            
             List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
             request.setAttribute("utenti", utenti);
-            
-            
+        
             
             List<Post> posts = PostFactory.getInstance().getPostList(utente);
-            request.setAttribute("posts", posts);
+            request.setAttribute("posts", posts);       
             
+            
+            
+         
+           
+             
             //caso nuovo post
                 if(request.getParameter("inviapost") != null){
                 request.setAttribute("content", content);
+                
                 session.setAttribute("wrPost", request.getParameter("newpost"));
                 request.setAttribute("invioPost", "okk");
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
             
+          /*  //caso conferma nuovo post
+                if(request.getParameter("sendpost") != null){
+                    
+                    Post post = new Post();
+                   
+                    post.setContent(content);
+                    post.setAutore((int)session.getAttribute("id"));
+                    PostFactory.getInstance().addNewPost(post);
+                request.setAttribute("sendPostok", "okk");
+                
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}*/
+          
+          
             //caso conferma nuovo post
                 if(request.getParameter("sendpost") != null){
                     Post post = new Post();
                     post.setContent(content);
                     post.setUser(UtentiRegFactory.getInstance().getUtenteById(userID));
+                    post.setAutore(UtentiRegFactory.getInstance().getUtenteById((int)session.getAttribute("id")));
                     PostFactory.getInstance().addNewPost(post);
+                    
                 request.setAttribute("sendPostok", "okk");
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+
                 
             session.setAttribute("loggedOn", true);            
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);

@@ -17,13 +17,16 @@ public class Post {
     
     protected int id;
     protected UtentiReg user;
+    protected UtentiReg autore;
     private String content;
     
 
     public Post() {
         id = 0;
         user = null;
+        autore = null;
         content = "";
+        
         
     }
 
@@ -68,10 +71,16 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
-
-    void setUser(ArrayList<UtentiReg> autore) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+     public UtentiReg getAutore() {
+        return autore;
     }
+
+    public void setAutore(UtentiReg autore) {
+        this.autore = autore;
+    }
+
+ 
 }
 
 

@@ -7,6 +7,8 @@ package amm.nerdbook;
 
 
        
+import amm.nerdbook.Classi.Post;
+import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
@@ -58,14 +60,35 @@ public class Profilo extends HttpServlet {
             
             
         }
+        //caso cancellazione utente
+        if(request.getParameter("delete") != null){
+            
+            Integer id = (Integer)session.getAttribute("id");
+            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
+            request.setAttribute("utente", utente);
+           
+            Post post = new Post();
+                    
+            post.setUser(UtentiRegFactory.getInstance().getUtenteById(id));
+            request.setAttribute("cancella" , "ok");
+            PostFactory.getInstance().deletePosts(post);
+            UtentiRegFactory.getInstance().cancellaUtente(utente);
+            request.setAttribute("complete" , "ok");
+            session.invalidate();
+            request.getRequestDispatcher("login.html").forward(request, response);
+        }
         
+        
+        //
         
         // caso utente loggato
         
         if (session.getAttribute("loggedOn") != null &&
             session.getAttribute("loggedOn").equals(true)) {
-            
-            
+        
+            Integer id = (Integer)session.getAttribute("id");
+            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
+            request.setAttribute("utente", utente);
             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
             
             

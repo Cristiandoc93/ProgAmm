@@ -81,7 +81,7 @@ public class UtentiRegFactory {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-           // e.printStackTrace();
+            e.printStackTrace();
         }
             
         return null;
@@ -206,6 +206,29 @@ public class UtentiRegFactory {
         return -1;
         
     }
+    
+    public void cancellaUtente(UtentiReg utente){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from utenti "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, utente.getId());
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+            
     
     
    

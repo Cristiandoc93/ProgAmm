@@ -58,6 +58,10 @@ a:hover{
     font-weight: bold;
 }
 
+input:focus{
+    border: 1px solid black;
+}
+
 .active{
     font-weight: bold;
     font-size: 20px;
@@ -303,7 +307,8 @@ article{
 
 #loginbody{
     margin-bottom: 200px;
-    margin-left: 20%;
+    margin-left: 400px;
+    margin-right: 400px;
     margin-top: 172px;
 }
 
@@ -314,10 +319,13 @@ article{
     text-align: center;
     border-right-style: solid;
     border-bottom: 3px black solid;
+    border-left-style: solid;
+    border-top-style: solid;
 }
 
 #titlelogin h1{
     padding-top: 20px;
+    margin-top: 0px;
 }
 
 #loginuser{
@@ -326,6 +334,7 @@ article{
     border-color: black;
     border-right-style: solid;
     border-bottom-style: solid;
+    border-left-style: solid; 
     width: 280px;
     font: 16px/15px "Open Sans",Arial,sans-serif;
     font-weight: bold;
@@ -536,6 +545,7 @@ footer{
     #loginbody{
         margin-left: 5px;
         width: auto;
+        margin-right: 0px;
     }
     
     #loginuser{
@@ -691,7 +701,21 @@ footer{
         width: 80%;
         max-width: 200px;
     }
+    
+    
+    
+    /******* login *******/
+    
+    #loginbody{
+    margin-bottom: 200px;
+    margin-left: 20%;
+    margin-right: 100%;
+    margin-top: 172px;
+    }
+    
 }
+
+
 
 
 

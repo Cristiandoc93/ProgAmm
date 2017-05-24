@@ -60,12 +60,12 @@
             
             <!--- utente connesso -->
                 
-                <c:if test="${empty modifica && loggedOn == true}">
+                <c:if test="${empty cancella && empty modifica && loggedOn == true}">
                 
                 <div id="profileform">
                 
                   <div id="titleform">
-                  <p>Inserisci i tuoi dati</p>
+                  <p>Modifica i tuoi dati</p>
                   </div>
 
                   <br/>
@@ -73,31 +73,31 @@
                       <div class="labeltrick">
                       <label for="nome">Nome utente</label>
                       </div>
-                      <input name="nome" id="nome" type="text"/>
+                      <input name="nome" id="nome" type="text" value ="${utente.nome}"/>
                       <br/>
 
                       <div class="labeltrick">
                       <label for="cognome">Cognome utente</label>
                       </div>
-                      <input name="cognome" id="cognome" type="text"/>
+                      <input name="cognome" id="cognome" type="text" value ="${utente.cognome}"/>
                       <br/>
 
                       <div class="labeltrick">
                       <label for="img"> Url Immagine profilo</label>
                       </div>
-                      <input name="img" id="img" type="url"/>
+                      <input name="img" id="img" type="url" />
                       <br/>
 
                       <div class="labeltrick">
                       <label for="present">Presentazione</label>
                       </div>
-                      <textarea name="present" id="present"></textarea>
+                      <textarea name="present" id="present" value ="${utente.presentazione}"></textarea>
                       <br/>
 
                       <div class="labeltrick">
                       <label for="bday">Data di nascita</label>
                       </div>
-                      <input name="bday" id="bday" type="date"/>
+                      <input name="bday" id="bday" type="date" value ="${utente.datanascita}"/>
                       <br/>
 
                       <div class="labeltrick">
@@ -113,7 +113,11 @@
                       <br/>
 
                       <input type="submit" name="Conf" value="Invia">
+                      
+                      
+                      <input type="submit" name="delete" value="Cancella profilo">
 
+                      
                   </form>
                   
                     
@@ -161,6 +165,24 @@
                     </div>
                     
                 </c:if>
+            
+            
+            <!-- cancellazione utente ----->
+            
+            <c:if test="${cancella != null && loggedOn == true}">
+                
+                <div id="errorProfile">
+                        <p> Utente cancellato! </p>
+                        <br/>
+                        
+                </div>
+                    
+                <div id="profileform" class="nascosto">
+           
+                </div>
+                    
+            
+            </c:if>
             
             
             

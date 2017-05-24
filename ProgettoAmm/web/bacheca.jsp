@@ -142,15 +142,20 @@
                 <div id="post">
                 <c:forEach var="post" items="${posts}">    
                     <div class="posts">
+                        
+                        
                         <div class="author">
-                            <img class="imgp" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
-                            <h3>${utente.nome} ${utente.cognome}</h3>
+                            <img class="imgp" alt="Foto di ${post.autore.nome}" src="${post.autore.urlfotoprofilo}">
+                            <h3>${post.autore.nome} ${post.autore.cognome}</h3>
+                          
                         </div>
                         
                         
                         <p> 
+                            
                             ${post.content}
                         </p>
+                        
                         
                     </div>
                 </c:forEach>  

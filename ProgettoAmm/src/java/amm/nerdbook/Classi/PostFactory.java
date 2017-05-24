@@ -42,62 +42,57 @@ public class PostFactory {
     private PostFactory() {}
     
 
-    public Post getPostById(int id) {
-
-        UtentiRegFactory utentiFactory = UtentiRegFactory.getInstance();
-        
-        try {
+   public Post getPostById(int id){
+   UtentiRegFactory utentireg = UtentiRegFactory.getInstance();
+       try 
+        {
             // path, username, password
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
-            
-            String query = 
-                      "select * from post "
-                   
-                    + "where id = ?";
-            
+            String query = "select * from post "
+            + "where id = ?";
             // Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(query);
-            
             // Si associano i valori
             stmt.setInt(1, id);
-            
             // Esecuzione query
             ResultSet res = stmt.executeQuery();
-
-            // ciclo sulle righe restituite
-            if (res.next()) {
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
                 Post current = new Post();
-                //imposto id del post
                 current.setId(res.getInt("id"));
                 
-                //impost il contenuto del post
                 current.setContent(res.getString("content"));
-                
-               
-                
-                //imposto l'autore del post
-                UtentiReg autore = utentiFactory.getUtenteById(res.getInt("utente_post"));
-              
-
-                current.setUser(autore);
-
+                UtentiReg autore = utentireg.getUtenteById(res.getInt("autore_post"));
+                UtentiReg utente = utentireg.getUtenteById(res.getInt("utente_post"));
+                current.setUser(utente);
+                current.setAutore(autore);
                 stmt.close();
                 conn.close();
                 return current;
             }
-
+            
             stmt.close();
             conn.close();
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             e.printStackTrace();
         }
         return null;
-        
     }
+   
+    
+    /////////////////////////////////
+    
+    
+    
+////////////////////////////////////
 
    
     public List getPostList(UtentiReg utt) {
-
+        UtentiRegFactory utentepost = UtentiRegFactory.getInstance();
         List<Post> listaPost = new ArrayList<Post>();
 
         try {
@@ -123,13 +118,11 @@ public class PostFactory {
                 Post current = new Post();
                 //imposto id del post
                 current.setId(res.getInt("id"));
-                
-                //impost il contenuto del post
+             
                 current.setContent(res.getString("content"));
-                
-               
-
-                //imposto l'autore del post
+     
+                current.setAutore(utentepost.getUtenteById(res.getInt("autore_post")));
+           
                 current.setUser(utt);
                 
                 listaPost.add(current);
@@ -143,15 +136,14 @@ public class PostFactory {
 
         return listaPost;
     }
-    
-     public void addNewPost(Post post){
+    public void addNewPost(Post post){
         try {
             // path, username, password
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             
             String query = 
-                      "insert into post (id, utente_post, content) "
-                    + "values (default, ? , ?)";
+                      "insert into post (id, utente_post, autore_post, content) "
+                    + "values (default, ? , ? , ?)";
             
             // Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -161,7 +153,8 @@ public class PostFactory {
 
             
             stmt.setInt(1, post.getUser().getId());
-            stmt.setString(2, post.getContent());
+            stmt.setString(3, post.getContent());
+            stmt.setInt(2, post.getAutore().getId());
             
             // Esecuzione query
             stmt.executeUpdate();
@@ -171,7 +164,62 @@ public class PostFactory {
         }
     }
 
-   
-    
-}
+    /* public void addNewPost(Post post){
+        try {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "insert into post (id, utente_post,autore_post, content) "
+                    + "values (default, ? , ? , ?)";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            // Si associano i valori
+            
 
+            
+            stmt.setInt(1, post.getUser().getId());
+            stmt.setInt(1, post.getAutore());
+            stmt.setString(3, post.getContent());
+            
+            // Esecuzione query
+            stmt.executeUpdate();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }*/
+     
+     public void deletePosts(Post post){
+         
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from post "
+                    + "where utente_post = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, post.getUser().getId());
+     
+            
+                
+                
+                
+             
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+
+     }
+}
