@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class PostFactory {
 
-    //Pattern Design Singleton
+
     private static PostFactory singleton;
 
     public static PostFactory getInstance() {
@@ -37,7 +37,7 @@ public class PostFactory {
             return this.connectionString;
     }
 
-   //private ArrayList<Post> listaPost = new ArrayList<Post>();
+   
 
     private PostFactory() {}
     
@@ -46,18 +46,18 @@ public class PostFactory {
    UtentiRegFactory utentireg = UtentiRegFactory.getInstance();
        try 
         {
-            // path, username, password
+          
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             String query = "select * from post "
             + "where id = ?";
-            // Prepared Statement
+            
             PreparedStatement stmt = conn.prepareStatement(query);
-            // Si associano i valori
+           
             stmt.setInt(1, id);
-            // Esecuzione query
+          
             ResultSet res = stmt.executeQuery();
            
-             // ciclo sulle righe restituite
+         
             if(res.next()) 
             {
                 Post current = new Post();
@@ -96,27 +96,27 @@ public class PostFactory {
         List<Post> listaPost = new ArrayList<Post>();
 
         try {
-            // path, username, password
+         
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             
             String query = 
                       "select * from post "
                       + "where utente_post = ?";
             
-            // Prepared Statement
+       
             PreparedStatement stmt = conn.prepareStatement(query);
             
-            // Si associano i valori
+        
             stmt.setInt(1, utt.getId());
             
-            // Esecuzione query
+ 
             ResultSet res = stmt.executeQuery();
 
-            // ciclo sulle righe restituite
+       
             while (res.next()) {
                 
                 Post current = new Post();
-                //imposto id del post
+        
                 current.setId(res.getInt("id"));
              
                 current.setContent(res.getString("content"));
@@ -136,19 +136,21 @@ public class PostFactory {
 
         return listaPost;
     }
+    
+    
     public void addNewPost(Post post){
         try {
-            // path, username, password
+          
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             
             String query = 
                       "insert into post (id, utente_post, autore_post, content) "
                     + "values (default, ? , ? , ?)";
             
-            // Prepared Statement
+         
             PreparedStatement stmt = conn.prepareStatement(query);
             
-            // Si associano i valori
+          
             
 
             
@@ -156,70 +158,96 @@ public class PostFactory {
             stmt.setString(3, post.getContent());
             stmt.setInt(2, post.getAutore().getId());
             
-            // Esecuzione query
+         
             stmt.executeUpdate();
+            
+            
         }
         catch(SQLException e){
             e.printStackTrace();
         }
     }
 
-    /* public void addNewPost(Post post){
-        try {
-            // path, username, password
-            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
-            
-            String query = 
-                      "insert into post (id, utente_post,autore_post, content) "
-                    + "values (default, ? , ? , ?)";
-            
-            // Prepared Statement
-            PreparedStatement stmt = conn.prepareStatement(query);
-            
-            // Si associano i valori
-            
-
-            
-            stmt.setInt(1, post.getUser().getId());
-            stmt.setInt(1, post.getAutore());
-            stmt.setString(3, post.getContent());
-            
-            // Esecuzione query
-            stmt.executeUpdate();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
-    }*/
-     
-     public void deletePosts(Post post){
-         
-         try{
+    
+     public void deletePosts(Post post, UtentiReg utente) throws SQLException{
          Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+         
+         
+        
+         
+        
+         
+             conn.setAutoCommit(false);
             
             String query = 
                       "delete from post "
                     + "where utente_post = ?";
             
-            // Prepared Statement
+            String query2 = 
+                      "delete from utenti "
+                    + "where id = ?";
+            
+         
             PreparedStatement stmt = conn.prepareStatement(query);
-            
-            
+            PreparedStatement stmt2 = conn.prepareStatement(query2);
+               try{   
             stmt.setInt(1, post.getUser().getId());
-     
             
-                
-                
-                
-             
             stmt.executeUpdate();
             
+            stmt2.setInt(1, utente.getId());
             
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
+  
+            stmt2.executeUpdate();
+            
+           
+          
+         }
+         
+         catch (SQLException e ) {
+                    PostFactory.printSQLException(e);
+                    if (conn != null) {
+                    try {
+                    System.err.print("Transaction is being rolled back");
+                    conn.rollback();
+                    } catch(SQLException excep) {
+                    PostFactory.printSQLException(excep);
+                    }
+                    }
         
+            
+          
+        }
+          finally {
+             
+                        if (stmt != null) {
+                        stmt.close();
+                        }
+                        if (stmt2 != null) {
+                        stmt2.close();
+                        }
+                        conn.setAutoCommit(true);
+                  }
+    }
 
+     
+     
+     public static void printSQLException(SQLException ex) { 
+        for (Throwable e : ex) { 
+        if (e instanceof SQLException) { 
+       
+        e.printStackTrace(System.err); 
+        System.err.println("SQLState: " + ((SQLException)e).getSQLState()); 
+        System.err.println("Error Code: " + ((SQLException)e).getErrorCode()); 
+        System.err.println("Message: " + e.getMessage()); 
+        Throwable t = ex.getCause(); 
+        while (t != null) { 
+        System.out.println("Cause: " + t); 
+        t = t.getCause(); 
+                } 
+            } 
+        } 
      }
 }
+
+    

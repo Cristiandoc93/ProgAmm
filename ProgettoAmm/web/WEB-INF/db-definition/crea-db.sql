@@ -50,7 +50,7 @@ CREATE TABLE partecipa(
 
 INSERT INTO utenti (id, username, nome, cognome, urlfotoprofilo, presentazione, 
                     datanascita, password)
-VALUES (default, 'cri', 'Cristian', 'Rossi', 'img/ginopino.jpg', 'Ciao Ciao', '12/30/1990', '12345678' );
+VALUES (default, 'cristiano', 'Cristian', 'Rossi', 'img/ginopino.jpg', 'Ciao Ciao', '12/30/1990', '12345678' );
 
 INSERT INTO utenti (id, username, nome, cognome, urlfotoprofilo, presentazione, 
                     datanascita, password)
@@ -67,16 +67,16 @@ VALUES (default, 'lola', 'Lolita', 'Bianchi', 'img/tinotoni.jpg', 'Bye Bye', '12
 -- Post --
 
 INSERT INTO post (id, utente_post, autore_post, content)
-VALUES (default, 1, 2, 'fsdsdfsdfsdfsdfsdfsd');
+VALUES (default, 1, 1, 'fsdsdfsdfsdfsdfsdfsd');
 
 INSERT INTO post (id, utente_post, autore_post, content)
-VALUES (default, 1, 1, 'rtsgfsdfsfsdfsdfsdfsdfsdfsdfsdfsdfsd');   
+VALUES (default, 2, 2, 'rtsgfsdfsfsdfsdfsdfsdfsdfsdfsdfsdfsd');   
 
 INSERT INTO post (id, utente_post, autore_post, content)
 VALUES (default, 2, 2, 'fsdfsdfsdfsdfsdfsdfsdfsfsdfsd');
 
 INSERT INTO post (id, utente_post, autore_post, content)
-VALUES (default, 2, 1, 'dfgsdfsdfsdfsdfsdfsdfsdfsdfsdf');
+VALUES (default, 4, 4, 'dfgsdfsdfsdfsdfsdfsdfsdfsdfsdf');
 
 INSERT INTO post (id, utente_post, autore_post, content)
 VALUES (default, 4, 4, 'Aristotile non si è acquistata sí grande autorità se non per la forza delle sue dimostrazioni e della profondità de i suoi discorsi: ma bisogna intenderlo, e non solamente intenderlo, ma aver tanta gran pratica ne suoi libri, che se ne sia formata unidea perfettissima modo che ogni suo detto vi sia sempre innanzi alla menteerché non ha scritto per il volgo, né si è obligato a infilzare i suoi silogismi col metodo triviale ordinato, anzi, servendosi del perturbato, ha messo talvolta la prova di una proposizione fra t');

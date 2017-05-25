@@ -106,12 +106,7 @@
                       <input name="psw" id="psw" type="password">
                       <br/>
 
-                      <div class="labeltrick">
-                      <label for="cpsw">Conferma Password</label>
-                      </div>
-                      <input name="cpsw" id="cpsw" type="password">
-                      <br/>
-
+                     
                       <input type="submit" name="Conf" value="Invia">
                       
                       

@@ -19,7 +19,7 @@
             <p>Persone online</p>
         </div>
         
-        <c:if test="${loggedOn == true}">
+        <c:if test="${loggedOn == true && bacError != true}">
         <div id="listpers">
             <c:forEach var="utenti" items="${utenti}">
                 

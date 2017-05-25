@@ -50,6 +50,7 @@
                         <p> ${urlPost} </p>
                         </div>
                         <input type="text" hidden name="newpost" value="${content}"> 
+                        <input type="url" hidden name="urlP" value="${url}">
                         <input type="submit" name="sendpost" value="Invia post">
                     </form>       
                     </div>
@@ -68,7 +69,7 @@
                     
                         <p class="sumPost">Hai scritto sulla bacheca di ${utente.nome}</p>
                         
-                        <%-- <input type="text" hidden name="newpost" value="${content}"> --%>
+                       
                         </div>
                         
                     
@@ -134,12 +135,14 @@
                   <label for="urlP"> Puoi anche aggiungere un allegato!</label>
                   <input name="urlP" id="urlP" type="url"/>
                   <br/> 
+                  <input type="url" hidden name="urlP" value="${url}">
                   <input type="text" hidden name="newpost" value="${content}">
                   <input type="submit" name="inviapost" value="Scrivi">
                 </form>
                 </div>
                    
                 <div id="post">
+                    
                 <c:forEach var="post" items="${posts}">    
                     <div class="posts">
                         
@@ -154,6 +157,7 @@
                         <p> 
                             
                             ${post.content}
+                            
                         </p>
                         
                         

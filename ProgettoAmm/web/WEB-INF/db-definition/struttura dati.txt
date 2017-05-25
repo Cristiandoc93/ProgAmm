@@ -15,7 +15,8 @@ UTENTI
 POST
 
 -id (KEY)
--user ( REFERENCES id(UTENTI) )
+-utente_post ( REFERENCES id(UTENTI) )
+-autore_post ( REFERENCES id(UTENTI) )
 -content
 
 

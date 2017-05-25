@@ -12,8 +12,11 @@ import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +39,7 @@ public class Profilo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(true);
@@ -64,17 +67,18 @@ public class Profilo extends HttpServlet {
         if(request.getParameter("delete") != null){
             
             Integer id = (Integer)session.getAttribute("id");
+            
             UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
             request.setAttribute("utente", utente);
-           
             Post post = new Post();
-                    
             post.setUser(UtentiRegFactory.getInstance().getUtenteById(id));
             request.setAttribute("cancella" , "ok");
-            PostFactory.getInstance().deletePosts(post);
-            UtentiRegFactory.getInstance().cancellaUtente(utente);
+            PostFactory.getInstance().deletePosts(post,utente);
+          
             request.setAttribute("complete" , "ok");
             session.invalidate();
+            
+      
             request.getRequestDispatcher("login.html").forward(request, response);
         }
         
@@ -115,7 +119,11 @@ public class Profilo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Profilo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -129,7 +137,11 @@ public class Profilo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Profilo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
