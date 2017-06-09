@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -142,7 +143,9 @@ public class UtentiRegFactory {
             // path, username, password
             Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
             Statement stmt = conn.createStatement();
+            
             String query = "select * from utenti";
+            
             ResultSet set = stmt.executeQuery(query);
             
              // ciclo sulle righe restituite
@@ -168,6 +171,54 @@ public class UtentiRegFactory {
             e.printStackTrace();
         }
         return listaUtenti;
+    }
+    ////////
+     
+    public ArrayList<UtentiReg> getutenteList(String text)
+    {
+       ArrayList<UtentiReg> utenti = new ArrayList<UtentiReg>();
+        
+        try {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "select * from utenti " +
+                      "where nome LIKE ? OR cognome LIKE ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            // Si associano i valori
+            text = "%"+text+"%";
+            stmt.setString(1, text);
+            stmt.setString(2, text);
+
+            
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+
+            // ciclo sulle righe restituite
+            while (res.next()) {
+                UtentiReg current = new UtentiReg();
+                current.setId(res.getInt("id"));
+//                current.setUsername(res.getString("username"));
+                current.setNome(res.getString("nome"));
+                current.setCognome(res.getString("cognome"));
+//                current.setUrlfotoprofilo(res.getString("urlfotoprofilo"));
+//                current.setPresentazione(res.getString("presentazione"));
+//                current.setDatanascita(res.getString("datanascita"));
+//                current.setPassword(res.getString("password"));
+                utenti.add(current);
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return utenti;
     }
     
     public int getIdUserAndPassword(String user, String password){

@@ -79,7 +79,7 @@ public class Bacheca extends HttpServlet {
             String content = request.getParameter("newpost");
             String url = request.getParameter("urlP");
             
-            List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
+            ArrayList<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
             request.setAttribute("utenti", utenti);
         
             

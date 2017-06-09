@@ -29,9 +29,11 @@
         <jsp:include page="nav.jsp"/>
         
         </div>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/javascript.js"></script>
         <jsp:include page="nesidebar.jsp"/>
         
-        
+             
            
             <div id="content">
                 
@@ -125,6 +127,8 @@
                 <div id="newPost">
                     
                     
+                    
+              
                     
                 <form action="bacheca.html?user=${utente.id}" method="post">
 

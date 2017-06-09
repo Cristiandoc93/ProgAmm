@@ -125,12 +125,22 @@ nav li:last-child{
 #sidebar{
     
     background-color: white;
+    list-style-type: none; 
     float:left;
     width: 200px;
     border-right: 3px black solid;
     border-bottom: 3px black solid;
     border-left: 3px black solid;
     height: 100%;
+}
+#sidebar input{
+    width: 80%;
+    max-width: 120px;
+   
+}
+
+#searchplace{
+    width: 145px;
 }
 
 #persone{
@@ -141,6 +151,13 @@ nav li:last-child{
 #titlebar{
     font-size: 17px;
     font-weight: bold;
+}
+#sidebar ul{
+    padding-left: 0px;
+}
+#sidebar li{
+    list-style-type: none;
+    
 }
 /***** content ******/
 
@@ -658,6 +675,10 @@ footer{
         width: 140px;
         border-left: 3px black solid;
         border-bottom: 3px black solid;
+    }
+    
+    #searchplace{
+    width: 95%;
     }
     
     #content {
