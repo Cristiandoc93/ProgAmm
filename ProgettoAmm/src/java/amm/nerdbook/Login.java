@@ -5,7 +5,10 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.GruppiRegFactory;
+import amm.nerdbook.Classi.PartecipaFactory;
 import amm.nerdbook.Classi.PostFactory;
+import amm.nerdbook.Classi.PostGruppoFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
@@ -45,8 +48,8 @@ public class Login extends HttpServlet {
     
     @Override
     public void init(){
-       //String dbConnection = "jdbc:derby://localhost:1527/ammdb";
-        String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
+       String dbConnection = "jdbc:derby://localhost:1527/ammdb";
+        //String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
        try {
            Class.forName(JDBC_DRIVER);
        } catch (ClassNotFoundException ex) {
@@ -54,6 +57,9 @@ public class Login extends HttpServlet {
        }
        UtentiRegFactory.getInstance().setConnectionString(dbConnection);
        PostFactory.getInstance().setConnectionString(dbConnection);
+       GruppiRegFactory.getInstance().setConnectionString(dbConnection);
+       PartecipaFactory.getInstance().setConnectionString(dbConnection);
+       PostGruppoFactory.getInstance().setConnectionString(dbConnection);
     }
 
 

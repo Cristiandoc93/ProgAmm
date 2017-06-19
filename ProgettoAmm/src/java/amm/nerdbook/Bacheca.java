@@ -1,5 +1,7 @@
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.Gruppi;
+import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import amm.nerdbook.Classi.Post;
@@ -39,7 +41,7 @@ public class Bacheca extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
       
-         
+        
          
          
          
@@ -49,19 +51,26 @@ public class Bacheca extends HttpServlet {
          if(session!=null && 
            session.getAttribute("loggedOn")!=null &&
            session.getAttribute("loggedOn").equals(true)){
-          
+           
             String user = request.getParameter("user");
+            
+            String group = request.getParameter("group");
+            
+            
+           
             
             int userID = (int)session.getAttribute("id");
             
             
             
-            
             if(user != null){
+               
                 userID = Integer.parseInt(user);
+                
             } else {
                 
                 Integer id = (Integer)session.getAttribute("id");
+                
                 userID = id;
                 
                 }
@@ -84,7 +93,10 @@ public class Bacheca extends HttpServlet {
         
             
             List<Post> posts = PostFactory.getInstance().getPostList(utente);
-            request.setAttribute("posts", posts);       
+            request.setAttribute("posts", posts); 
+            
+            ArrayList<Gruppi> gruppi = GruppiRegFactory.getInstance().getGruppiList();
+            request.setAttribute("gruppi", gruppi);
             
             
             
@@ -114,7 +126,8 @@ public class Bacheca extends HttpServlet {
                     
                 request.setAttribute("sendPostok", "okk");
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
-
+            
+               
                 
             session.setAttribute("loggedOn", true);            
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);
@@ -122,9 +135,11 @@ public class Bacheca extends HttpServlet {
             
     
             }
-       
+        
+           
             
         request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+        
          
         
         }}

@@ -31,9 +31,9 @@
         <div id="sidebar" class="fixSide">
                 <ul>
                     
-                    <li><a href="#whatis">Cosa è NerdBook</a></li>
-                    <li><a href="#howto">Come registrarsi</a></li>
-                    <li><a href="#whythis">Perchè NerdBook</a></li>      
+                    <li><a href="#whatis"><h3>Cosa è NerdBook</h3></a></li>
+                    <li><a href="#howto"><h3>Come registrarsi</h3></a></li>
+                    <li><a href="#whythis"><h3>Perchè NerdBook</h3></a></li>      
                 </ul> 
         </div>
         

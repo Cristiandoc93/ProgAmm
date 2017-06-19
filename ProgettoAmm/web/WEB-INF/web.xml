@@ -16,6 +16,10 @@
         <servlet-name>Filter</servlet-name>
         <servlet-class>amm.nerdbook.Filter</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Group</servlet-name>
+        <servlet-class>amm.nerdbook.Group</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Bacheca</servlet-name>
         <url-pattern>/bacheca.html</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Filter</servlet-name>
         <url-pattern>/Filter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Group</servlet-name>
+        <url-pattern>/gruppo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

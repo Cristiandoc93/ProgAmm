@@ -78,7 +78,7 @@
                        
                     </div>
                     
-                </div>
+                
             
                 </c:if>
                 
@@ -121,28 +121,35 @@
                     </c:if>
                 </c:if>
                 
+           
+                
                 <%-- Utente connesso --%>
                 
                 <c:if test="${loggedOn == true && invioPost == null && sendPostok == null}">
+                    
+                    <div id="presTop">
+                        ${utente.presentazione}
+                        
+                        
+                      
+                    </div>
+                        
+                        
                 <div id="newPost">
-                    
-                    
-                    
-              
-                    
-                <form action="bacheca.html?user=${utente.id}" method="post">
+                                
+                    <form action="bacheca.html?user=${utente.id}" method="post">
 
-                    <label for="newpost">Scrivi un nuovo post sulla bacheca di ${utente.nome}</label>
-                    <br/>
+                        <label for="newpost">Scrivi un nuovo post sulla bacheca di ${utente.nome}</label>
+                        <br/>
 
-                  <textarea name="newpost" id="newpost"></textarea>
-                  <label for="urlP"> Puoi anche aggiungere un allegato!</label>
-                  <input name="urlP" id="urlP" type="url"/>
-                  <br/> 
-                  <input type="url" hidden name="urlP" value="${url}">
-                  <input type="text" hidden name="newpost" value="${content}">
-                  <input type="submit" name="inviapost" value="Scrivi">
-                </form>
+                      <textarea name="newpost" id="newpost"></textarea>
+                      <label for="urlP"> Puoi anche aggiungere un allegato!</label>
+                      <input name="urlP" id="urlP" type="url"/>
+                      <br/> 
+                      <input type="url" hidden name="urlP" value="${url}">
+                      <input type="text" hidden name="newpost" value="${content}">
+                      <input type="submit" name="inviapost" value="Scrivi">
+                    </form>
                 </div>
                    
                 <div id="post">
@@ -170,6 +177,8 @@
                 </div>
                       
                 </c:if>
+                
+             
             </div>
             
         </div>  

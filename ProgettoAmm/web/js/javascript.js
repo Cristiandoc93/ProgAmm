@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 
+
+
+
+
+
 function aggiornaLista(utenti)
         {
             // Cancella la lista

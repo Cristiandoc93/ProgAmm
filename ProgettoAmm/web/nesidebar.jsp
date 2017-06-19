@@ -25,7 +25,7 @@
           
         
 
-        <div id="titlebar">
+        <div class="titlebar">
             <p>Persone online</p>
         </div>
         
@@ -45,11 +45,27 @@
                                     <li nome="utente">${utente.nome} ${utente.cognome}
                                         <a href="login.html?user=${utente.id}">
                                             
+                                   
                                             bacheca
+                                            
+                                            
                                         </a>
                                     </li>
                                </c:forEach>
                       </ul> 
+                      
+                       <div class="titlebar">
+                             <p>Gruppi</p>
+                       </div>
+                       
+                      <c:forEach var="gruppi" items="${gruppi}">
+                      
+                      
+                          <p><a href="gruppo?group=${gruppi.gruppo_id}">
+                                   ${gruppi.nome_gruppo}
+                                  
+                             </a></p>
+                      </c:forEach>
                     
                 </c:if>
             
