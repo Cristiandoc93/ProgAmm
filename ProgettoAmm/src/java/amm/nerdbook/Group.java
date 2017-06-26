@@ -4,6 +4,8 @@ import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.Partecipa;
 import amm.nerdbook.Classi.PartecipaFactory;
+import amm.nerdbook.Classi.Post;
+import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.PostGruppo;
 import amm.nerdbook.Classi.PostGruppoFactory;
 import amm.nerdbook.Classi.UtentiReg;
@@ -121,8 +123,9 @@ public class Group extends HttpServlet {
             
             }
             
-         /*
-           
+            //richiamo la lista partecipanti
+            ArrayList<Partecipa> partecipanti = PartecipaFactory.getInstance().getListaPartecipanti(groupID);
+            //request.setAttribute("partecipanti", partecipanti); 
              
             //caso nuovo post
                 if(request.getParameter("inviapost") != null){
@@ -131,24 +134,36 @@ public class Group extends HttpServlet {
                 session.setAttribute("wrPost", request.getParameter("newpost"));
                 session.setAttribute("urlPost", request.getParameter("urlP"));
                 request.setAttribute("invioPost", "okk");
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+                request.getRequestDispatcher("bachecag.jsp").forward(request, response);}
             
           
           
             //caso conferma nuovo post
                 if(request.getParameter("sendpost") != null){
-                    Post post = new Post();
-                    post.setContent(content + "<br>"
+                    PostGruppo postg = new PostGruppo();
+                    postg.setContent(content + "<br>"
                           + url);
                     
-                   post.setUser(UtentiRegFactory.getInstance().getUtenteById(userID));
+                   postg.setAutore_post_gruppo(UtentiRegFactory.getInstance().getUtenteById((int)session.getAttribute("id")));
+                    postg.setGruppo_id(GruppiRegFactory.getInstance().getGruppoById(groupID));
+                    PostGruppoFactory.getInstance().addNewPostGruppo(postg);
+                    
+                
+                
+               for (int i = 0; i < partecipanti.size(); i++) {
+                   UtentiReg prova = partecipanti.get(i).getUtente_id();
+                   Post post = new Post(); 
+                   post.setContent(content + "<br>"
+                          + url);
+                    
+                    post.setUser(prova);
                     post.setAutore(UtentiRegFactory.getInstance().getUtenteById((int)session.getAttribute("id")));
                     PostFactory.getInstance().addNewPost(post);
-                    
-                request.setAttribute("sendPostok", "okk");
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
-            
-               */
+                   
+               }
+               
+               request.setAttribute("sendPostok", "okk");
+                request.getRequestDispatcher("bachecag.jsp").forward(request, response);}
                 
             session.setAttribute("loggedOn", true);            
             request.getRequestDispatcher("bachecag.jsp").forward(request, response);

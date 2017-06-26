@@ -38,6 +38,53 @@
            
             <div id="content">
                 
+                
+                
+                 <%-- pagina di invio post --%>
+                
+                <c:if test="${invioPost != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                    <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                        <p class="sumPost"> stai scrivendo nella bacheca di ${gruppo.nome_gruppo}</p>
+                        <div id='summaryPost'>
+                        <p> ${wrPost} </p>
+                        <p> ${urlPost} </p>
+                        </div>
+                        <input type="text" hidden name="newpost" value="${content}"> 
+                        <input type="url" hidden name="urlP" value="${url}">
+                        <input type="submit" name="sendpost" value="Invia post">
+                    </form>       
+                    </div>
+                    
+                </div>
+            
+                </c:if>
+                
+                <%-- caso messaggio inviato ---%>
+                
+                <c:if test="${sendPostok != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                    
+                        <p class="sumPost">Hai scritto sulla bacheca di ${gruppo.nome_gruppo}</p>
+                        
+                       
+                        </div>
+                        
+                    
+                       
+                    </div>
+                    
+                
+            
+                </c:if>
+                
+                
               
                 
                 <%-- bacheca gruppo --%>
@@ -68,9 +115,28 @@
                          
                     
                 </div>
-                </c:if>
+                    </c:if>
                     
-                    
+                    <c:if test="${okgroup == true}">
+                        
+                        
+                        <div id="newPost">
+                                
+                    <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+
+                        <label for="newpost">Scrivi un nuovo post sulla bacheca di ${gruppo.nome_gruppo}</label>
+                        <br/>
+
+                      <textarea name="newpost" id="newpost"></textarea>
+                      <label for="urlP"> Puoi anche aggiungere un allegato!</label>
+                      <input name="urlP" id="urlP" type="url"/>
+                      <br/> 
+                      <input type="url" hidden name="urlP" value="${url}">
+                      <input type="text" hidden name="newpost" value="${content}">
+                      <input type="submit" name="inviapost" value="Scrivi">
+                    </form>
+                        </div>
+                    </c:if>
                     
                 
                 <div id="post">
@@ -79,6 +145,9 @@
                   ${gruppo.amm_gruppo.nome} 
                    ${gruppo.amm_gruppo.id}
                     ${utente.id}
+                     <c:forEach var="par" items="${partecipanti}">   
+                    ${par.utente_id.id}
+                     </c:forEach>
                     
                 <c:forEach var="postg" items="${postsg}">    
                     <div class="posts">

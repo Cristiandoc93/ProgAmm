@@ -110,6 +110,37 @@ public class PostGruppoFactory {
             e.printStackTrace();
         }
     }
+      
+      
+       public void addNewPostGruppo(PostGruppo postg){
+        try {
+          
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "insert into post_gruppo (post_id, gruppo_id, autore_post_gruppo, content) "
+                    + "values (default, ? , ? , ?)";
+            
+         
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+          
+            
+
+            
+            stmt.setInt(1, postg.getGruppo_id().gruppo_id);
+            stmt.setString(3, postg.getContent());
+            stmt.setInt(2, postg.getAutore_post_gruppo().getId());
+            
+         
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
     
     
 }

@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -170,7 +172,51 @@ public class PartecipaFactory {
             e.printStackTrace();
         }
     }
-           
+    
+    
+    public ArrayList getListaPartecipanti(int gruppo){
+         UtentiRegFactory partecipante = UtentiRegFactory.getInstance();
+        ArrayList<Partecipa> listapartecipanti = new ArrayList<Partecipa>();
+
+        try {
+         
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "select * from partecipa "
+                      + "where gruppo_id = ?";
+            
+       
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+        
+            stmt.setInt(1, gruppo);
+            
+ 
+            ResultSet res = stmt.executeQuery();
+
+       
+            while (res.next()) {
+                
+                Partecipa current = new Partecipa();
+                UtentiReg utente = partecipante.getUtenteById(res.getInt("utente_id"));
+                current.setUtente_id(utente);
+                
+             
+                
+                
+                listapartecipanti.add(current);
+            }
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listapartecipanti;
+    }
+    
     
     
 }

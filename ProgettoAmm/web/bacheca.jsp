@@ -129,12 +129,27 @@
                     
                     <div id="presTop">
                         ${utente.presentazione}
-                        
-                        
-                      
+                     
                     </div>
+                        <c:if test="${same == false}">
+                        <c:if test="${amiciziaok == false}">
+                     <div id="addfriends">
+                         
+                            tu e ${utente.nome} non siete amici ! 
+                            
+                            <form action="login.html?user=${utente.id}" method="post">
+                            <input type="submit" name="addfr" value="aggiungi amico">
+                            </form>
+                            
                         
+                     </div>
+                            
+                         </c:if>
+                       
+                            
+                         </c:if>
                         
+                 <c:if test="${amiciziaok == true || same == true}">       
                 <div id="newPost">
                                 
                     <form action="bacheca.html?user=${utente.id}" method="post">
@@ -151,6 +166,8 @@
                       <input type="submit" name="inviapost" value="Scrivi">
                     </form>
                 </div>
+                      
+                 </c:if>
                    
                 <div id="post">
                     

@@ -5,6 +5,7 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.AmiciziaFactory;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.PartecipaFactory;
 import amm.nerdbook.Classi.PostFactory;
@@ -60,6 +61,7 @@ public class Login extends HttpServlet {
        GruppiRegFactory.getInstance().setConnectionString(dbConnection);
        PartecipaFactory.getInstance().setConnectionString(dbConnection);
        PostGruppoFactory.getInstance().setConnectionString(dbConnection);
+       AmiciziaFactory.getInstance().setConnectionString(dbConnection);
     }
 
 

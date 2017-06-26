@@ -1,7 +1,9 @@
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.AmiciziaFactory;
 import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
+import amm.nerdbook.Classi.PartecipaFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import amm.nerdbook.Classi.Post;
@@ -57,7 +59,7 @@ public class Bacheca extends HttpServlet {
             String group = request.getParameter("group");
             
             
-           
+            int userid = (int)session.getAttribute("id");
             
             int userID = (int)session.getAttribute("id");
             
@@ -74,7 +76,11 @@ public class Bacheca extends HttpServlet {
                 userID = id;
                 
                 }
-           
+           if(userid == userID){
+               request.setAttribute("same", true);
+           }else{
+               request.setAttribute("same", false);
+           }
 
           
          UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
@@ -99,8 +105,28 @@ public class Bacheca extends HttpServlet {
             request.setAttribute("gruppi", gruppi);
             
             
-            
+            int friend = AmiciziaFactory.getInstance().getIdUtenteAndSeguace((int)session.getAttribute("id"), userID);
+            if( friend != -1){
+                request.setAttribute("amiciziaok", true);
+            }else{
+                request.setAttribute("amiciziaok", false);
+            }
          
+            
+            //caso aggiungi amico
+            
+            if(request.getParameter("addfr") != null)
+            {
+            
+            int seguace = userID;
+            
+            AmiciziaFactory.getInstance().addamico(userid, seguace);
+            request.setAttribute("addfr",null);
+            request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+            
+            
+            }
+            
            
              
             //caso nuovo post

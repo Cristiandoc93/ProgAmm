@@ -263,6 +263,15 @@ article{
     padding: 10px;
 }
 
+#addfriends{
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #dad7f2;
+    border: #f5f5f5 solid 2px;
+    margin-bottom: 5px;
+    padding: 10px; 
+}
+
 #newPost{
     margin-left: 10px;
     margin-top: 10px;
