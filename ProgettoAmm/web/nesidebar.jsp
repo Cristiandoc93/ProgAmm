@@ -13,7 +13,8 @@
     <div id="persone" >
         
         <div id="myuser">
-            Connesso come:<p class="user"> ${nome} </p>
+            Connesso come:<p class="user">  <img class="imgpro" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
+                ${utente.nome} </p>
         </div>
         
         

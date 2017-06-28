@@ -94,7 +94,7 @@
                 <c:if test="${okgroup == false}">
                 <div id="presTop">
                     
-                    ciao Nome visitatore ---> tasto pr iscriversi 
+                    ciao ${utente.nome}
                     <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
                     <input type="submit" name="Iscrizione" value="Iscriviti">
                     </form>
@@ -140,11 +140,7 @@
                     
                 
                 <div id="post">
-                    ${partecipa.utente_id.id}
-                    ${gruppo.gruppo_id}
-                  ${gruppo.amm_gruppo.nome} 
-                   ${gruppo.amm_gruppo.id}
-                    ${utente.id}
+                   
                      <c:forEach var="par" items="${partecipanti}">   
                     ${par.utente_id.id}
                      </c:forEach>

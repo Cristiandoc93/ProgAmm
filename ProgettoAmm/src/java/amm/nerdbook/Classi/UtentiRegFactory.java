@@ -279,8 +279,147 @@ public class UtentiRegFactory {
             e.printStackTrace();
         }
     }
-            
     
+    
+    
+    public void updateNome(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET nome = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }   
+    
+    public void updateCognome(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET cognome = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    } 
+    
+    public void updateImg(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET  urlfotoprofilo = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    } 
+    
+    
+    public void updatePresentazione(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET presentazione = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    } 
+    
+    public void updateBday(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET datanascita = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    } 
+    
+    public void updatePass(String utente,int id){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "update utenti SET password = ? "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, utente);
+            stmt.setInt(2, id);
+            
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    } 
     
    
     

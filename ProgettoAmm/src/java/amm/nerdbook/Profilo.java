@@ -7,6 +7,8 @@ package amm.nerdbook;
 
 
        
+import amm.nerdbook.Classi.Gruppi;
+import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.UtentiReg;
@@ -46,19 +48,70 @@ public class Profilo extends HttpServlet {
         
          List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
          request.setAttribute("utenti", utenti);
+         ArrayList<Gruppi> gruppi = GruppiRegFactory.getInstance().getGruppiList();
+            request.setAttribute("gruppi", gruppi);
         
         //inserimento dati profilo
+        int user = (int)session.getAttribute("id");
+        
+        String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
+        String img = request.getParameter("img");
+        String present = request.getParameter("present");
+        String bday = request.getParameter("bday");
+         String psw = request.getParameter("psw");
+        
         
         if(request.getParameter("Conf") != null){
-            session.setAttribute("name", request.getParameter("nome"));
-            session.setAttribute("sirname", request.getParameter("cognome"));
-            session.setAttribute("image", request.getParameter("img"));
-            session.setAttribute("presentazione", request.getParameter("present"));
-            session.setAttribute("birthday", request.getParameter("bday"));
-            session.setAttribute("password", request.getParameter("psw"));
-            session.setAttribute("confpsw", request.getParameter("cpsw"));
+            request.setAttribute("nome", nome);
+            session.setAttribute("cognome", cognome);
+            session.setAttribute("img", img);
+            session.setAttribute("present", present);
+            session.setAttribute("bday",bday);
+            session.setAttribute("psw", psw);
+         
+            UtentiReg modute = new UtentiReg();
             
+            
+            if(!nome.isEmpty() ){
+            modute.setNome(nome);
+            UtentiRegFactory.getInstance().updateNome(nome,user);
             request.setAttribute("modifica" , "ok");
+            }
+            if(!cognome.isEmpty()){
+            modute.setCognome(cognome);
+            UtentiRegFactory.getInstance().updateCognome(cognome,user);
+            request.setAttribute("modifica" , "ok");
+            }
+            if(!img.isEmpty()){
+            modute.setUrlfotoprofilo(img);
+            UtentiRegFactory.getInstance().updateImg(img,user);
+            request.setAttribute("modifica" , "ok");
+            }
+             
+            if(!present.isEmpty()){
+            modute.setPresentazione(present);
+            UtentiRegFactory.getInstance().updatePresentazione(present,user);
+            request.setAttribute("modifica" , "ok");
+            }
+            
+            if(!bday.isEmpty()){
+            modute.setDatanascita(bday);
+            UtentiRegFactory.getInstance().updateBday(bday,user);
+            request.setAttribute("modifica" , "ok");
+            }
+            
+            if(!psw.isEmpty()){
+            modute.setPassword(psw);
+            UtentiRegFactory.getInstance().updatePass(psw,user);
+            request.setAttribute("modifica" , "ok");
+            }
+            
+            
+            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(user);
+            request.setAttribute("utente", utente);
+            
+            
             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
             
             
