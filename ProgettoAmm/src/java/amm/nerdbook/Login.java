@@ -6,6 +6,8 @@
 package amm.nerdbook;
 
 import amm.nerdbook.Classi.AmiciziaFactory;
+import amm.nerdbook.Classi.Amm;
+import amm.nerdbook.Classi.AmmFactory;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.PartecipaFactory;
 import amm.nerdbook.Classi.PostFactory;
@@ -62,6 +64,7 @@ public class Login extends HttpServlet {
        PartecipaFactory.getInstance().setConnectionString(dbConnection);
        PostGruppoFactory.getInstance().setConnectionString(dbConnection);
        AmiciziaFactory.getInstance().setConnectionString(dbConnection);
+       AmmFactory.getInstance().setConnectionString(dbConnection);
     }
 
 
@@ -97,6 +100,7 @@ public class Login extends HttpServlet {
                     {   
                       session.setAttribute("loggedOn", true);
                       session.setAttribute("id", u.getId());
+                     
                       session.setAttribute("nome", u.getNome());                     
                       request.setAttribute("utente", u);
                       //caso attributi presenti

@@ -38,6 +38,22 @@
            
             <div id="content">
                 
+                <c:if test="${cancfinito != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                        <div class="author">
+                        <h3>Hai cancellato questo post!</h3>
+                        </div>
+                        
+                            <p> ${postcance}</p>
+                        
+                    </div>
+                    
+                </div>
+                 
+                </c:if>
                 
                 
                  <%-- pagina di invio post --%>
@@ -89,7 +105,7 @@
                 
                 <%-- bacheca gruppo --%>
                 
-                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null}">
+                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null && cancfinito == null}">
                    
                 <c:if test="${okgroup == false}">
                 <div id="presTop">
@@ -159,9 +175,19 @@
                         <p> 
                             
                              ${postg.content}
+                             
                             
                         </p>
                         
+                         <c:if test="${amm != null}">
+                           <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                                <input type="text" hidden name="gid" value="${postg.gruppo_id.gruppo_id}">
+                                <input type="text" hidden name="contentg" value="${postg.content}">
+                                <input type="submit" name="cancposts" value="Cancella post">
+                            
+                          
+                            </form>
+                        </c:if>
                         
                     </div>
                 </c:forEach>  

@@ -1,6 +1,8 @@
 package amm.nerdbook;
 
 import amm.nerdbook.Classi.AmiciziaFactory;
+import amm.nerdbook.Classi.Amm;
+import amm.nerdbook.Classi.AmmFactory;
 import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.PartecipaFactory;
@@ -44,7 +46,7 @@ public class Bacheca extends HttpServlet {
         HttpSession session = request.getSession(true);
       
         
-         
+        
          
          
         //caso utente loggato
@@ -56,17 +58,16 @@ public class Bacheca extends HttpServlet {
            
             String user = request.getParameter("user");
             
-            String group = request.getParameter("group");
+            //String group = request.getParameter("group");
             
             
             int userid = (int)session.getAttribute("id");
             
             int userID = (int)session.getAttribute("id");
             
-            
-            
+             
             if(user != null){
-               
+                
                 userID = Integer.parseInt(user);
                 
             } else {
@@ -76,42 +77,51 @@ public class Bacheca extends HttpServlet {
                 userID = id;
                 
                 }
+            
+            //caso stessa bacheca
            if(userid == userID){
                request.setAttribute("same", true);
            }else{
                request.setAttribute("same", false);
            }
-
-          
-         UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
+       
+          UtentiReg utentep = UtentiRegFactory.getInstance().getUtenteById(userid);
+          UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
          
-         
+          Amm amm = AmmFactory.getInstance().getUtenteById(userid);
+             session.setAttribute("amm", amm);
+            
         
       
         if(utente != null && session.getAttribute("bacError") != "true") {
+            request.setAttribute("sendPostok", null);
             request.setAttribute("utente", utente);
+            request.setAttribute("utentep", utentep);
             
-            String content = request.getParameter("newpost");
-            String url = request.getParameter("urlP");
+                  
+            ArrayList<Post> posts = PostFactory.getInstance().getPostList(utente);
+            request.setAttribute("posts", posts); 
+         
             
+              
+              
             ArrayList<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
             request.setAttribute("utenti", utenti);
         
-            
-            List<Post> posts = PostFactory.getInstance().getPostList(utente);
-            request.setAttribute("posts", posts); 
             
             ArrayList<Gruppi> gruppi = GruppiRegFactory.getInstance().getGruppiList();
             request.setAttribute("gruppi", gruppi);
             
             
+            
+            //confronto amicizia
             int friend = AmiciziaFactory.getInstance().getIdUtenteAndSeguace((int)session.getAttribute("id"), userID);
             if( friend != -1){
                 request.setAttribute("amiciziaok", true);
             }else{
                 request.setAttribute("amiciziaok", false);
             }
-         
+
             
             //caso aggiungi amico
             
@@ -122,15 +132,39 @@ public class Bacheca extends HttpServlet {
             
             AmiciziaFactory.getInstance().addamico(userid, seguace);
             request.setAttribute("addfr",null);
+            request.setAttribute("amiciziaok", true);
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-            
+            return;
             
             }
+      
+            //caso cancellazione post admin
+              if(request.getParameter("cancposts") != null){
+              String ute = request.getParameter("ute");
+              String contentx = request.getParameter("contentx");
+              
+              int i = PostFactory.getInstance().getidPostByutenteandContent(ute,contentx );
+              PostFactory.getInstance().cancposts(i);
+              ute = null;
+              request.setAttribute("postcance",contentx);
+              contentx = null;
+              
+              request.setAttribute("cancposts",null);
+              
+              
+              request.setAttribute("cancfinito",true);
+              
+              request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+              
+              return;
+            }  
+              
+            String content = request.getParameter("newpost");
+            String url = request.getParameter("urlP");
             
-           
-             
             //caso nuovo post
                 if(request.getParameter("inviapost") != null){
+          
                 request.setAttribute("content", content);
                 request.setAttribute("url", url);
                 session.setAttribute("wrPost", request.getParameter("newpost"));
@@ -151,6 +185,7 @@ public class Bacheca extends HttpServlet {
                     PostFactory.getInstance().addNewPost(post);
                     
                 request.setAttribute("sendPostok", "okk");
+                request.setAttribute("invioPost", null);
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
             
                

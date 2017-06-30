@@ -85,15 +85,53 @@ public class PostFactory {
    
     
     /////////////////////////////////
+   public int getidPostByutenteandContent(String utt, String content){
+        try
+        {
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            // sql command
+            String query = "select * from post where "
+                    + "utente_post = ? and content = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // dati
+            
+            stmt.setString(1, utt);
+            stmt.setString(2, content);
+            //
+            ResultSet set = stmt.executeQuery();
+
+            
+            if(set.next())
+            {
+              
+        
+               int id  = set.getInt("id");
+           
+                
+                stmt.close();
+                conn.close();
+                return id;
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            
+        return 0;
+            
+    }
+
+   
     
     
     
 ////////////////////////////////////
 
    
-    public List getPostList(UtentiReg utt) {
+    public ArrayList getPostList(UtentiReg utt) {
         UtentiRegFactory utentepost = UtentiRegFactory.getInstance();
-        List<Post> listaPost = new ArrayList<Post>();
+        ArrayList<Post> listaPost = new ArrayList<Post>();
 
         try {
          
@@ -167,7 +205,30 @@ public class PostFactory {
             e.printStackTrace();
         }
     }
-
+    
+    
+    public void cancposts(int post){
+       
+          try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from post "
+                    + "where id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, post);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
     
      public void deletePosts(Post post, UtentiReg utente) throws SQLException{
          Connection conn = DriverManager.getConnection(connectionString, "cri", "123");

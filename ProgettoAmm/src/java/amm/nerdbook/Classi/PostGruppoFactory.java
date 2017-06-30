@@ -142,5 +142,64 @@ public class PostGruppoFactory {
         }
     }
     
+    public void cancpostsgruppo(int post){
+       
+          try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from post_gruppo "
+                    + "where post_id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, post);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
     
+    public int getidPostByutenteandContent(String gid, String content){
+        try
+        {
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            // sql command
+            String query = "select * from post_gruppo where "
+                    + "gruppo_id = ? and content = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // dati
+            
+            stmt.setString(1, gid);
+            stmt.setString(2, content);
+            //
+            ResultSet set = stmt.executeQuery();
+
+            
+            if(set.next())
+            {
+              
+        
+               int id  = set.getInt("post_id");
+           
+                
+                stmt.close();
+                conn.close();
+                return id;
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+            
+        return 0;
+            
+    }
+
 }

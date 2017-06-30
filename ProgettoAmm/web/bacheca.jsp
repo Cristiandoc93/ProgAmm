@@ -38,6 +38,27 @@
             <div id="content">
                 
                 
+                
+                <%-- pagina conf canc post amm --%>
+                
+                <c:if test="${cancfinito != null}">
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                        <div class="author">
+                        <h3>Hai cancellato questo post!</h3>
+                        </div>
+                        
+                            <p> ${postcance}</p>
+                        
+                    </div>
+                    
+                </div>
+                 
+                </c:if>
+                
+                
                 <%-- pagina di invio post --%>
                 
                 <c:if test="${invioPost != null}">
@@ -60,6 +81,11 @@
                 </div>
             
                 </c:if>
+                
+                
+                
+                
+             
                 
                 <%-- caso messaggio inviato ---%>
                 
@@ -125,10 +151,12 @@
                 
                 <%-- Utente connesso --%>
                 
-                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null}">
+                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null && cancfinito== null}">
                     
                     <div id="presTop">
                         ${utente.presentazione}
+                       
+                        
                      
                     </div>
                         <c:if test="${same == false}">
@@ -137,7 +165,7 @@
                          
                             tu e ${utente.nome} non siete amici ! 
                             
-                            <form action="login.html?user=${utente.id}" method="post">
+                            <form onclick="" onsubmit=""action="bacheca.html?user=${utente.id}" method="post">
                             <input type="submit" name="addfr" value="aggiungi amico">
                             </form>
                             
@@ -171,9 +199,12 @@
                    
                 <div id="post">
                     
+                    
+                    
+                    
                 <c:forEach var="post" items="${posts}">    
                     <div class="posts">
-                        
+                       
                         
                         <div class="author">
                             <img class="imgp" alt="Foto di ${post.autore.nome}" src="${post.autore.urlfotoprofilo}">
@@ -183,15 +214,29 @@
                         
                         
                         <p> 
+                          
                             
                             ${post.content}
                             
+                            
                         </p>
                         
+                        <c:if test="${amm != null}">
+                            <form action="bacheca.html?user=${utente.id}" method="post">
+                                <input type="text" hidden name="ute" value="${post.user.id}">
+                                <input type="text" hidden name="contentx" value="${post.content}">
+                                <input type="submit" name="cancposts" value="Cancella post">
+                            
+                          
+                            </form>
+                        </c:if>
                         
                     </div>
                 </c:forEach>  
                 </div>
+                        
+       
+              
                       
                 </c:if>
                 

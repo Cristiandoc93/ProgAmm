@@ -1,5 +1,7 @@
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.Amm;
+import amm.nerdbook.Classi.AmmFactory;
 import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.Partecipa;
@@ -44,9 +46,7 @@ public class Group extends HttpServlet {
         HttpSession session = request.getSession(true);
       
         
-         
-         
-         
+  
         //caso utente loggato
          if(session.getAttribute("bacError") != "true"){
         
@@ -66,7 +66,10 @@ public class Group extends HttpServlet {
             Partecipa partecipa = PartecipaFactory.getInstance().getPartecipanteById(userID);
             Gruppi gruppo = GruppiRegFactory.getInstance().getGruppoById(groupID);
             UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(userID);
-            
+             UtentiReg utentep = UtentiRegFactory.getInstance().getUtenteById(utente_id);
+            request.setAttribute("utentep", utentep);
+              Amm amm = AmmFactory.getInstance().getUtenteById(utente_id);
+             session.setAttribute("amm", amm);
             
             if(utente != null && session.getAttribute("bacError") != "true") {
             request.setAttribute("partecipa", partecipa);
@@ -91,7 +94,26 @@ public class Group extends HttpServlet {
             }else{
                 request.setAttribute("okgroup", false);
             }
-            
+            //caso cancellazione post admin
+              if(request.getParameter("cancposts") != null){
+              String gid = request.getParameter("gid");
+              String contentg = request.getParameter("contentg");
+              
+              int i = PostGruppoFactory.getInstance().getidPostByutenteandContent(gid,contentg );
+              PostGruppoFactory.getInstance().cancpostsgruppo(i);
+              gid = null;
+              request.setAttribute("postcance",contentg);
+              contentg = null;
+              
+              request.setAttribute("cancposts",null);
+              
+              
+              request.setAttribute("cancfinito",true);
+              
+              request.getRequestDispatcher("bachecag.jsp").forward(request, response);
+              
+              return;
+            }  
            
             
             //caso iscrizione

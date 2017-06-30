@@ -67,6 +67,12 @@ CREATE TABLE post_gruppo(
     FOREIGN KEY (autore_post_gruppo) REFERENCES utenti(id),
     FOREIGN KEY (gruppo_id) REFERENCES gruppi(gruppo_id)
 );  
+
+CREATE TABLE amm(
+    utente INTEGER,
+    FOREIGN KEY (utente) REFERENCES utenti(id),
+    PRIMARY KEY (utente)
+);
 --Utenti--
 
 INSERT INTO utenti (id, username, nome, cognome, urlfotoprofilo, presentazione, 
@@ -100,13 +106,13 @@ INSERT INTO post (id, utente_post, autore_post, content)
 VALUES (default, 3, 4, 'dfgsdfsdfsdfsdfsdfsdfsdfsdfsdf');
 
 INSERT INTO post (id, utente_post, autore_post, content)
-VALUES (default, 4, 3, 'Aristotile non si è acquistata sí grande autorità se non per la forza delle sue dimostrazioni e della profondità de i suoi discorsi: ma bisogna intenderlo, e non solamente intenderlo, ma aver tanta gran pratica ne suoi libri, che se ne sia formata unidea perfettissima modo che ogni suo detto vi sia sempre innanzi alla menteerché non ha scritto per il volgo, né si è obligato a infilzare i suoi silogismi col metodo triviale ordinato, anzi, servendosi del perturbato, ha messo talvolta la prova di una proposizione fra t');
+VALUES (default, 4, 3, 'osizione fra t');
 
 
 -- Amicizie --
 
 INSERT INTO amicizia(utente, seguace)
-VALUES (1,2),(1,3);
+VALUES (1,2);
 
 INSERT INTO amicizia(utente, seguace)
 VALUES (2,1);
@@ -141,3 +147,9 @@ VALUES (default, 1, 2, ' ciacascascascascacascascascsacascascascascas' );
 
 INSERT INTO post_gruppo(post_id , gruppo_id, autore_post_gruppo, content)
 VALUES (default, 2, 3, ' dadasdasdasdsadasdasdas' );
+
+
+-- amministratore --
+
+INSERT INTO amm(utente)
+VALUES (1);

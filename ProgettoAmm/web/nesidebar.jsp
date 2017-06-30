@@ -7,14 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-
+ <c:if test="${loggedOn == true && bacError != true}">
 
 <div id="sidebar">
     <div id="persone" >
         
         <div id="myuser">
-            Connesso come:<p class="user">  <img class="imgpro" alt="Foto di ${utente.nome}" src="${utente.urlfotoprofilo}">
-                ${utente.nome} </p>
+            Connesso come:<p class="user">  <img class="imgpro" alt="Foto di ${utentep.nome}" src="${utentep.urlfotoprofilo}">
+                ${utentep.nome} </p>
         </div>
         
         
@@ -32,7 +32,7 @@
         
         
         
-        <c:if test="${loggedOn == true && bacError != true}">
+       
             
         <div class="listperscerc">
             
@@ -44,7 +44,7 @@
                       <ul id="utenti">
                                <c:forEach var="utente" items="${utenti}">
                                     <li nome="utente">${utente.nome} ${utente.cognome}
-                                        <a href="login.html?user=${utente.id}">
+                                        <a href="bacheca.html?user=${utente.id}">
                                             
                                    
                                             bacheca
@@ -78,4 +78,6 @@
         
     </div> 
 </div>
-        
+
+
+
