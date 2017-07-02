@@ -17,12 +17,12 @@
                 ${utentep.nome} </p>
         </div>
         
-        
+     
         <div class="titlebar">  
              <label for="ricerca">Barra di ricerca</label>
                          
              <input id="ricerca" type="text" value="">
-             <button id="ricercabutton">Cerca</button>
+         
           
         
 
@@ -58,15 +58,24 @@
                        <div class="titlebar">
                              <p>Gruppi</p>
                        </div>
+                        <div class="titlebar">     
+                        <form method="post" action="bacheca.html">
+                        <input type="submit" name="makegroup" value="Crea il tuo gruppo!">
+                        </form>
+                       </div>
                        
                       <c:forEach var="gruppi" items="${gruppi}">
                       
                       
-                          <p><a href="gruppo?group=${gruppi.gruppo_id}">
+                          <p><a href="gruppo.html?group=${gruppi.gruppo_id}">
                                    ${gruppi.nome_gruppo}
                                   
                              </a></p>
                       </c:forEach>
+                             
+                             
+            
+
                     
                 </c:if>
             

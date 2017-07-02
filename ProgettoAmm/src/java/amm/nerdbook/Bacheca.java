@@ -58,7 +58,7 @@ public class Bacheca extends HttpServlet {
            
             String user = request.getParameter("user");
             
-            //String group = request.getParameter("group");
+        
             
             
             int userid = (int)session.getAttribute("id");
@@ -187,8 +187,26 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("sendPostok", "okk");
                 request.setAttribute("invioPost", null);
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
-            
-               
+                
+             //caso creazione gruppo
+             if(request.getParameter("makegroup") != null){
+                 request.setAttribute("makegroupok", true);
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);}
+             
+            // caso conferma gruppo
+               if(request.getParameter("Conf") != null){
+                   String nome_gruppo = request.getParameter("nome_gruppo");
+                   String data_creazione = request.getParameter("data_creazione");
+                   Gruppi group = new Gruppi();
+                   group.setNome_gruppo(nome_gruppo);
+                   group.setData_creazione(data_creazione);
+                   group.setAmm_gruppo(utentep);
+                   GruppiRegFactory.getInstance().createGroup(group);
+                   int idgr = GruppiRegFactory.getInstance().getidByGroup(nome_gruppo);
+                   PartecipaFactory.getInstance().joinGroup(userid,idgr );
+                   request.setAttribute("confgr", true);
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+               }
                 
             session.setAttribute("loggedOn", true);            
             request.getRequestDispatcher("bacheca.jsp").forward(request, response);

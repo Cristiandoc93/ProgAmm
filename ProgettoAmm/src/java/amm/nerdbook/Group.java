@@ -140,7 +140,7 @@ public class Group extends HttpServlet {
             PartecipaFactory.getInstance().cancellaRelazione(groupID);
             GruppiRegFactory.getInstance().cancellaGruppo(groupID);
             
-            request.setAttribute("Cancella",null);
+      
             request.getRequestDispatcher("bacheca.html").forward(request, response);
             
             }

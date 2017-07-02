@@ -118,13 +118,12 @@
                  
                   </form>
                       
-                      
+                    <c:if test="${amm == null}">  
                       <form method="post" action="profilo.html">
                           
                           <input type="submit" name="delete" value="Cancella profilo">
                       </form>
-                    
-                  
+                    </c:if>
                 </div>
                 </c:if> 
             

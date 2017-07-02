@@ -34,11 +34,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Filter</servlet-name>
-        <url-pattern>/Filter</url-pattern>
+        <url-pattern>/filter.json</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Group</servlet-name>
-        <url-pattern>/gruppo</url-pattern>
+        <url-pattern>/gruppo.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

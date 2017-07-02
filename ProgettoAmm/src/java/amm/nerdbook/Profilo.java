@@ -8,6 +8,8 @@ package amm.nerdbook;
 
        
 import amm.nerdbook.Classi.AmiciziaFactory;
+import amm.nerdbook.Classi.Amm;
+import amm.nerdbook.Classi.AmmFactory;
 import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
 import amm.nerdbook.Classi.PartecipaFactory;
@@ -42,22 +44,35 @@ public class Profilo extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     * @throws java.sql.SQLException
+     */ 
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(true);
         
-         List<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
-         request.setAttribute("utenti", utenti);
-         ArrayList<Gruppi> gruppi = GruppiRegFactory.getInstance().getGruppiList();
-            request.setAttribute("gruppi", gruppi);
+        
+          if(session!=null && 
+           session.getAttribute("loggedOn")!=null &&
+           session.getAttribute("loggedOn").equals(true)){
+             
+           
+        
+            Integer id = (Integer)session.getAttribute("id");
+            
+            
+            
+            int user = (int)session.getAttribute("id");
+            Amm amm = AmmFactory.getInstance().getUtenteById(user);
+            request.setAttribute("amm", amm);
+      
         
         //inserimento dati profilo
-        int user = (int)session.getAttribute("id");
-        UtentiReg utentep = UtentiRegFactory.getInstance().getUtenteById(user);
-        request.setAttribute("utentep", utentep);
+        
+       if(request.getParameter("Conf") != null){
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String img = request.getParameter("img");
@@ -66,7 +81,7 @@ public class Profilo extends HttpServlet {
          String psw = request.getParameter("psw");
         
         
-        if(request.getParameter("Conf") != null){
+      
             request.setAttribute("nome", nome);
             session.setAttribute("cognome", cognome);
             session.setAttribute("img", img);
@@ -111,15 +126,8 @@ public class Profilo extends HttpServlet {
             request.setAttribute("modifica" , "ok");
             }
             
-            
-            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(user);
-            request.setAttribute("utente", utente);
-            
-            
-            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
-            
-            
-        }
+             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+            }
         //caso cancellazione utente
         if(request.getParameter("delete") != null){
             
@@ -148,33 +156,29 @@ public class Profilo extends HttpServlet {
             
       
             request.getRequestDispatcher("login.html").forward(request, response);
-        }
-        
-        
-        //
-        
-        // caso utente loggato
-        
-        if (session.getAttribute("loggedOn") != null &&
-            session.getAttribute("loggedOn").equals(true)) {
-        
-            Integer id = (Integer)session.getAttribute("id");
-            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
+          }
+        UtentiReg utentep = UtentiRegFactory.getInstance().getUtenteById(id);
+            request.setAttribute("utentep", utentep);
+             UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
             request.setAttribute("utente", utente);
-            request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+ 
+            ArrayList<UtentiReg> utenti = UtentiRegFactory.getInstance().getUtentiList();
+            request.setAttribute("utenti", utenti);
+        
             
-            
-            
-        }
-        else //caso errore login
+            ArrayList<Gruppi> gruppi = GruppiRegFactory.getInstance().getGruppiList();
+            request.setAttribute("gruppi", gruppi);
+        
+        request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
+  
+    }else //caso errore login
         {
         
             request.getRequestDispatcher("profiloPage.jsp").forward(request, response);
         }
-        
-        
+           
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

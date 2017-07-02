@@ -63,7 +63,7 @@
                           
                     
                     <div class="posts">
-                    <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                    <form action="gruppo.html?group=${gruppo.gruppo_id}" method="post">
                         <p class="sumPost"> stai scrivendo nella bacheca di ${gruppo.nome_gruppo}</p>
                         <div id='summaryPost'>
                         <p> ${wrPost} </p>
@@ -111,7 +111,7 @@
                 <div id="presTop">
                     
                     ciao ${utente.nome}
-                    <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                    <form action="gruppo.html?group=${gruppo.gruppo_id}" method="post">
                     <input type="submit" name="Iscrizione" value="Iscriviti">
                     </form>
                 </div>
@@ -123,7 +123,7 @@
                     Ciao, benvenuto in ${gruppo.nome_gruppo}
                     <c:if test="${gruppo.amm_gruppo.id == utente.id}">
                       
-                     <form action="bacheca.html" method="post">
+                     <form action="gruppo.html?group=${gruppo.gruppo_id}" method="post">
                     <input type="submit" name="Cancella" value="Cancella gruppo">
                     </form>
                    
@@ -138,7 +138,7 @@
                         
                         <div id="newPost">
                                 
-                    <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                    <form action="gruppo.html?group=${gruppo.gruppo_id}" method="post">
 
                         <label for="newpost">Scrivi un nuovo post sulla bacheca di ${gruppo.nome_gruppo}</label>
                         <br/>
@@ -180,7 +180,7 @@
                         </p>
                         
                          <c:if test="${amm != null}">
-                           <form action="gruppo?group=${gruppo.gruppo_id}" method="post">
+                           <form action="gruppo.html?group=${gruppo.gruppo_id}" method="post">
                                 <input type="text" hidden name="gid" value="${postg.gruppo_id.gruppo_id}">
                                 <input type="text" hidden name="contentg" value="${postg.content}">
                                 <input type="submit" name="cancposts" value="Cancella post">

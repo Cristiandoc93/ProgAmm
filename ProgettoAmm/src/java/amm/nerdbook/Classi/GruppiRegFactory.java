@@ -247,5 +247,72 @@ public class GruppiRegFactory {
         return 0;
     }
     
+    public void createGroup(Gruppi group){
+        try {
+          
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "insert into gruppi (gruppo_id, nome_gruppo, data_creazione, amm_gruppo) "
+                    + "values (default, ? , ? , ?)";
+            
+         
+            PreparedStatement stmt = conn.prepareStatement(query);
+             
+            stmt.setString(1, group.getNome_gruppo());
+            stmt.setString(2, group.getData_creazione());
+            stmt.setInt(3, group.getAmm_gruppo().getId());
+            
+         
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+            
+          
+    }
+     public int getidByGroup(String nome_gruppo){
+        
+      
+        
+        try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            String query = "select * from gruppi "
+            + "where nome_gruppo = ?";
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Si associano i valori
+            stmt.setString(1, nome_gruppo);
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
+             
+               
+                 int id  = res.getInt("gruppo_id");
+           
+                
+                stmt.close();
+                conn.close();
+                return id;
+            }
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
    
 }

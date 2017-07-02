@@ -13,14 +13,14 @@ function aggiornaLista(utenti)
         {
             // Cancella la lista
             $("#utenti").empty();
-            // Per ogni alunno trovato dal database
+       
             for(var utente in utenti)
             {
-                // Crea un nuovo tag li
+                
                 
                 // Crea link
                 var link = document.createElement("a");
-                link.setAttribute("href", "login.html?user="+utenti[utente].id);
+                link.setAttribute("href", "bacheca.html?user="+utenti[utente].id);
                 
                 var newli = document.createElement("li");
                 newli.setAttribute("nome", "utente");
@@ -47,12 +47,13 @@ function stateFailure(data, state){
 
 
 $(document).ready(function(){
-    $("#ricercabutton").click(function(){
+   // document.getElementById('ricerca').onkeypress(function(){
+    $("#ricerca").on('keyup', function(){
         
         var q = $("#ricerca")[0].value;
         
         $.ajax({
-            url: "Filter",
+            url: "filter.json",
             data:{
                 cmd: "search",
                 text: q

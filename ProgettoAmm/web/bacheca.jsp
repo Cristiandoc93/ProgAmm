@@ -37,6 +37,59 @@
            
             <div id="content">
                 
+                <%-- conferma gruppo --%>
+                <c:if test="${confgr != null}">
+                    
+                <div id="post">
+                          
+                    
+                    <div class="posts">
+                        <div class="author">
+                        <h3>Hai creato il gruppo!</h3>
+                        </div>
+                        
+                           
+                        
+                    </div>
+                    
+                </div>
+                    
+                </c:if>
+                
+                <%-- pagina crea gruppo --%>
+                
+                
+
+                 <c:if test="${makegroupok != null}">
+                     
+                      <div id="profileform">
+                
+                  <div id="titleform">
+                  <p>Crea il tuo gruppo!</p>
+                
+                  </div>
+                     
+                 <form method="post" action="bacheca.html">
+                      <div class="labeltrick">
+                      <label for="nome_gruppo">Nome Gruppo</label>
+                      </div>
+                      <input name="nome_gruppo" id="nome_gruppo" type="text"/>
+                      <input type="text" hidden name="nome_gruppo" value="${nome_gruppo}">
+                      <br/>
+                      
+                       <div class="labeltrick">
+                      <label for="data_creazione">Data creazione</label>
+                      </div>
+                      <input name="data_creazione" id="data_creazione" type="date"/>
+                      <input type="date" hidden name="data_creazione" value="${data_creazione}">
+                      <br/>
+        
+                      <input type="submit" name="Conf" value="Crea">
+                 
+                  </form>
+                      </div>
+                      
+                 </c:if>
                 
                 
                 <%-- pagina conf canc post amm --%>
@@ -151,7 +204,8 @@
                 
                 <%-- Utente connesso --%>
                 
-                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null && cancfinito== null}">
+                <c:if test="${loggedOn == true && invioPost == null && sendPostok == null && 
+                              cancfinito== null && makegroupok == null && confgr == null}">
                     
                     <div id="presTop">
                         ${utente.presentazione}
