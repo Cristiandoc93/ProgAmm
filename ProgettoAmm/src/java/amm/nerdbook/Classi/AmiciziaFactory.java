@@ -106,4 +106,56 @@ public class AmiciziaFactory {
         }
     }
     
+    public void cancellaAmicizia(int user){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from amicizia "
+                    + "where utente = ?";
+            
+            String query2 = 
+                      "delete from amicizia "
+                    + "where seguace = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            PreparedStatement stmt2 = conn.prepareStatement(query2);
+            
+            stmt.setInt(1, user);
+            stmt.executeUpdate();
+            
+            stmt2.setInt(1, user);
+            stmt2.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+   /* public void cancellaseguace(int seguace){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from amicizia "
+                    + "where seguace = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, seguace);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    */
+    
+    
 }

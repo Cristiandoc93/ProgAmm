@@ -201,5 +201,27 @@ public class PostGruppoFactory {
         return 0;
             
     }
+    public void cancellaPostByutente(int gruppo){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from post_gruppo "
+                    + "where autore_post_gruppo = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, gruppo);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
 
 }

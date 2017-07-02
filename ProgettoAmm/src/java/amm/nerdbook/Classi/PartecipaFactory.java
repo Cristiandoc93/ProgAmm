@@ -174,6 +174,29 @@ public class PartecipaFactory {
     }
     
     
+    public void cancellaPartecipante(int part){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from partecipa "
+                    + "where utente_id = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, part);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    
     public ArrayList getListaPartecipanti(int gruppo){
          UtentiRegFactory partecipante = UtentiRegFactory.getInstance();
         ArrayList<Partecipa> listapartecipanti = new ArrayList<Partecipa>();

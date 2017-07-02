@@ -230,9 +230,10 @@ public class PostFactory {
         }
     }
     
-     public void deletePosts(Post post, UtentiReg utente) throws SQLException{
+   
+    
+     public void CancPostandUtente(int utente2, int utente, int utente3) throws SQLException{
          Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
-         
          
         
          
@@ -245,21 +246,29 @@ public class PostFactory {
                     + "where utente_post = ?";
             
             String query2 = 
+                      "delete from post "
+                    + "where autore_post = ?";
+            
+            String query3 = 
                       "delete from utenti "
                     + "where id = ?";
             
          
             PreparedStatement stmt = conn.prepareStatement(query);
             PreparedStatement stmt2 = conn.prepareStatement(query2);
+            PreparedStatement stmt3 = conn.prepareStatement(query3);
                try{   
-            stmt.setInt(1, post.getUser().getId());
+            stmt.setInt(1,utente2);
             
             stmt.executeUpdate();
             
-            stmt2.setInt(1, utente.getId());
-            
+            stmt2.setInt(1,utente);
   
             stmt2.executeUpdate();
+            
+            stmt3.setInt(1,utente3);
+  
+            stmt3.executeUpdate();
             
            
           
@@ -286,6 +295,9 @@ public class PostFactory {
                         }
                         if (stmt2 != null) {
                         stmt2.close();
+                        }
+                        if (stmt3 != null) {
+                        stmt3.close();
                         }
                         conn.setAutoCommit(true);
                   }

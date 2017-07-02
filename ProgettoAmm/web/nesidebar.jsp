@@ -18,7 +18,7 @@
         </div>
         
         
-            
+        <div class="titlebar">  
              <label for="ricerca">Barra di ricerca</label>
                          
              <input id="ricerca" type="text" value="">
@@ -26,7 +26,7 @@
           
         
 
-        <div class="titlebar">
+      
             <p>Persone online</p>
         </div>
         

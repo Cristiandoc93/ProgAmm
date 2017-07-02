@@ -7,10 +7,13 @@ package amm.nerdbook;
 
 
        
+import amm.nerdbook.Classi.AmiciziaFactory;
 import amm.nerdbook.Classi.Gruppi;
 import amm.nerdbook.Classi.GruppiRegFactory;
+import amm.nerdbook.Classi.PartecipaFactory;
 import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
+import amm.nerdbook.Classi.PostGruppoFactory;
 import amm.nerdbook.Classi.UtentiReg;
 import amm.nerdbook.Classi.UtentiRegFactory;
 import java.io.IOException;
@@ -53,7 +56,8 @@ public class Profilo extends HttpServlet {
         
         //inserimento dati profilo
         int user = (int)session.getAttribute("id");
-        
+        UtentiReg utentep = UtentiRegFactory.getInstance().getUtenteById(user);
+        request.setAttribute("utentep", utentep);
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String img = request.getParameter("img");
@@ -119,15 +123,26 @@ public class Profilo extends HttpServlet {
         //caso cancellazione utente
         if(request.getParameter("delete") != null){
             
-            Integer id = (Integer)session.getAttribute("id");
+          //  UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(user);
+          //  request.setAttribute("utente", utente);
             
-            UtentiReg utente = UtentiRegFactory.getInstance().getUtenteById(id);
-            request.setAttribute("utente", utente);
-            Post post = new Post();
-            post.setUser(UtentiRegFactory.getInstance().getUtenteById(id));
             request.setAttribute("cancella" , "ok");
-            PostFactory.getInstance().deletePosts(post,utente);
-          
+       
+            AmiciziaFactory.getInstance().cancellaAmicizia(user);
+            //AmiciziaFactory.getInstance().cancellaseguace(user);
+            int i = GruppiRegFactory.getInstance().getammById(user);
+            if(i != 0){
+                    int u = GruppiRegFactory.getInstance().getidByamm(user);
+                
+                PostGruppoFactory.getInstance().cancellaPostGruppo(u);
+                PartecipaFactory.getInstance().cancellaRelazione(u);
+                GruppiRegFactory.getInstance().cancellaGruppiByAmm(user);
+            }
+       
+            PostGruppoFactory.getInstance().cancellaPostByutente(user);
+            PartecipaFactory.getInstance().cancellaPartecipante(user);
+            PostFactory.getInstance().CancPostandUtente(user,user,user);
+           
             request.setAttribute("complete" , "ok");
             session.invalidate();
             

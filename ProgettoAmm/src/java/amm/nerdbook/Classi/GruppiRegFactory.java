@@ -145,6 +145,107 @@ public class GruppiRegFactory {
         }
     }
     
+    public void cancellaGruppiByAmm(int user){
+         try{
+         Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            
+            String query = 
+                      "delete from gruppi "
+                    + "where amm_gruppo = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            
+            stmt.setInt(1, user);
+            stmt.executeUpdate();
+            
+            
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public int getammById(int utente){
+        
+      
+        
+        try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            String query = "select * from gruppi "
+            + "where amm_gruppo = ?";
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Si associano i valori
+            stmt.setInt(1, utente);
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
+             
+               
+                 
+           
+                
+                stmt.close();
+                conn.close();
+                return utente;
+            }
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public int getidByamm(int utente){
+        
+      
+        
+        try 
+        {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "cri", "123");
+            String query = "select * from gruppi "
+            + "where amm_gruppo = ?";
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            // Si associano i valori
+            stmt.setInt(1, utente);
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+           
+             // ciclo sulle righe restituite
+            if(res.next()) 
+            {
+             
+               
+                 int id  = res.getInt("gruppo_id");
+           
+                
+                stmt.close();
+                conn.close();
+                return id;
+            }
+            
+            stmt.close();
+            conn.close();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return 0;
+    }
     
    
 }

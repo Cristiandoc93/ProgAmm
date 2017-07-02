@@ -65,7 +65,8 @@
                 <div id="profileform">
                 
                   <div id="titleform">
-                  <p>Modifica i tuoi dati</p>
+                  <p>Modifica i tuoi dati ${prova}</p>
+                
                   </div>
 
                   <br/>
@@ -114,13 +115,14 @@
 
                      
                       <input type="submit" name="Conf" value="Invia">
-                      
-                      
-                      <input type="submit" name="delete" value="Cancella profilo">
-
-                      
+                 
                   </form>
-                  
+                      
+                      
+                      <form method="post" action="profilo.html">
+                          
+                          <input type="submit" name="delete" value="Cancella profilo">
+                      </form>
                     
                   
                 </div>

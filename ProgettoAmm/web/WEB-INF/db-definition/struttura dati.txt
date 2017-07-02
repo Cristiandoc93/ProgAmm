@@ -28,13 +28,13 @@ GRUPPI
 
 //RELAZIONI//
 
-SCRIVE [ 1 a 1 ]
+SCRIVE [ 1 a n ]
 
-( un utente scrive un post , un post è scritto da un solo utente )
+( un utente scrive piÃ¹ post , un post ï¿½ scritto da un solo utente )
 
 PARTECIPA [ n a n ]
 
-( un utente partecipa a più gruppi e ad un guppo partecipano più utenti )
+( un utente partecipa a piï¿½ gruppi e ad un guppo partecipano piï¿½ utenti )
 
 -utente_id (KEY) (REFERENCES id(UTENTI))
 -gruppo_id (KEY) (REFERENCES id(GRUPPI))
